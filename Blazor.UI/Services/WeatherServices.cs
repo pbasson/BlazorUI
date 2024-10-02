@@ -24,9 +24,9 @@ namespace Blazor.UI.Services
 
         private List<WeatherForecast> GetWeatherForecasts()
         {
-            var startDate = DateTime.Today.Date;
+            var startDate = DateOnly.FromDateTime(DateTime.Now);
 
-            var weatherList = Enumerable.Range(1, 20).Select(index => new WeatherForecast
+            var weatherList = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
