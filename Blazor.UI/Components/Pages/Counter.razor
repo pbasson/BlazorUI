@@ -1,0 +1,58 @@
+﻿@page "/Counter"
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+<button class="btn btn-primary" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
+
+<table>
+    <tr>
+        <thead>
+            <th>Current Count</th>
+            <th>Highest Count</th>
+            <th>Total Count</th>
+        </thead>
+        <tbody>
+            <td>@currentCount</td>  
+            <td>@highestCount</td>  
+            <td>@totalCount</td>  
+        </tbody>
+    </tr>
+</table>
+@* 
+<p role="status">Total Count: @totalCount</p>
+<p role="status">Current Count: </p> *@
+
+<br />
+
+<button class="btn btn-primary" @onclick="IncrementCount">Add Count</button>
+<button class="btn btn-primary" @onclick="ResetCount">Reset</button>
+
+@code {
+    private int currentCount = 0;
+    private int highestCount = 0;
+    private int totalCount = 0;
+    [Inject] NavigationManager _navManager { get; set; }
+
+    private void IncrementCount()
+    {
+        currentCount++;
+        totalCount++;
+        
+        if( totalCount > highestCount )
+        {
+            highestCount = totalCount;
+        }
+    }
+
+    private void ResetCount()
+    {
+        currentCount = 0;
+    }
+    void NavigateTo()
+    {
+        Console.WriteLine("Navigate To");
+        _navManager.NavigateTo("/"); 
+    }
+}

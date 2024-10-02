@@ -1,0 +1,36 @@
+﻿@page "/"
+@page "/home"
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h2>Welcome to Blazor UI</h2>
+<p>By Preetpal Basson (Developed & Designed)</p>
+
+<button class="btn btn-primary" @onclick="@( () => NavigateToPage("Weather") )" >Weather </button>
+<button class="btn btn-primary" @onclick="@( () => NavigateToPage("Counter") )" >Counter </button>
+<button class="btn btn-primary" @onclick="@( () => NavigateToPage("counter") )" >Counter </button>
+
+<button @onclick="Testing"></button>
+
+@code
+{
+    [Inject] NavigationManager _navManager { get; set; } = default!;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Console.WriteLine("Testing");
+    }
+
+    private void Testing()
+    {
+        Console.WriteLine("Button Test");
+    }
+
+    void NavigateToPage(string navigate)
+    {
+        Console.WriteLine($"Navigate To {navigate}");
+        _navManager.NavigateTo($"/{navigate}"); 
+    }
+}

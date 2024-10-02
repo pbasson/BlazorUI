@@ -1,0 +1,75 @@
+﻿@page "/Weather"
+@using Blazor.UI.Models
+@using Blazor.UI.Components.PageComponents
+@using Blazor.UI.Services
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Weather</h1>
+
+<p>This component demonstrates showing data.</p>
+
+<button class="btn btn-primary" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
+
+
+@if (Loading)
+{
+    <LoadingComponent />
+}
+else
+{
+    <button Class="btn-blue" @onclick="@( () => NavigateTo() )"><i class="bi bi-arrow-clockwise"></i>  </button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in DataSource)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Inject] NavigationManager _navManager { get; set; }
+    [Inject] WeatherServices _services { get; set; }
+
+    private List<WeatherForecast> DataSource { get; set; } = new();
+
+    bool Loading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        DataSource = await _services.GetWeatherForecastAsync();
+        if(DataSource != null && DataSource.Any() )
+        {
+            Loading = false;
+        }
+    }
+
+    void NavigateTo()
+    {
+        Console.WriteLine("Navigate To");
+        _navManager.NavigateTo("/"); 
+    }
+}
