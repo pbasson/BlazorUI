@@ -20,14 +20,11 @@
         </tbody>
     </tr>
 </table>
-@* 
-<p role="status">Total Count: @totalCount</p>
-<p role="status">Current Count: </p> *@
 
 <br />
 
-<button class="btn btn-primary" @onclick="IncrementCount">Add Count</button>
-<button class="btn btn-primary" @onclick="ResetCount">Reset</button>
+<button class="btn btn-primary" @onclick="IncrementCount"><i class="bi bi-plus-circle"></i> Add Count</button>
+<button class="btn btn-primary" @onclick="ResetCount"><i class="bi bi-arrow-clockwise"></i> Reset</button>
 
 @code {
     private int currentCount = 0;
