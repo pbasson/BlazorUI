@@ -1,15 +1,16 @@
 ﻿@page "/Weather"
+@using Blazor.UI.Helpers
 @using Blazor.UI.Models
 @using Blazor.UI.Components.PageComponents
 @using Blazor.UI.Services
 @attribute [StreamRendering]
 @rendermode InteractiveServer
 
-<PageTitle>Weather</PageTitle>
+<PageTitle>@PageStatics.WeatherPage</PageTitle>
 
-<h1>Weather</h1>
+<h1>@PageStatics.WeatherPage</h1>
 
-<p>This component demonstrates showing data.</p>
+<p>@PageStatics.WeatherPageDetails</p>
 
 <button class="btn btn-primary btn-space" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
 

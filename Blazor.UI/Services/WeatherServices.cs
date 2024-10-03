@@ -1,4 +1,3 @@
-
 using Blazor.UI.Models;
 
 namespace Blazor.UI.Services
@@ -22,23 +21,6 @@ namespace Blazor.UI.Services
 
         }
 
-        // private List<WeatherForecast> GetWeatherForecasts(List<WeatherForecast> datasource)
-        // {
-        //     var test = new List<WeatherForecast>();
-        
-        //     test = SetWeatherForecast(datasource);
-
-        //     // var startDate = DateTime.Today.Date;
-
-        //     // var weatherList = Enumerable.Range(1, 20).Select(index => new WeatherForecast
-        //     // {
-        //     //     Date = startDate.AddDays(index),
-        //     //     TemperatureC = Random.Shared.Next(-20, 55),
-        //     //     Summary = WeatherSummary[Random.Shared.Next(WeatherSummary.Length)]
-        //     // }).ToList();
-
-        //     return test;
-        // }
 
         public List<WeatherForecast> SetWeatherForecast(List<WeatherForecast>? forecasts = null )
         {
