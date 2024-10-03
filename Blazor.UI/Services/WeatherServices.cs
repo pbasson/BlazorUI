@@ -25,7 +25,7 @@ namespace Blazor.UI.Services
         public List<WeatherForecast> SetWeatherForecast(List<WeatherForecast>? forecasts = null )
         {
             var start = 1;
-            var end = 10;
+            var end = 5;
 
             if (forecasts != null && forecasts.Any() ) 
             {

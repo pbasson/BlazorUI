@@ -26,4 +26,31 @@ public class WeatherPageVM
         ResetList();
         UnsetLoading();
     }
+
+    public int MinWeather()
+    {
+        if (WeatherList.Count > 0)
+        {
+            return WeatherList.Select(x => x.TemperatureC).Min();
+        }
+        return 0;
+    } 
+
+    public int MaxWeather()
+    {
+        if (WeatherList.Count > 0)
+        {
+            return WeatherList.Select(x => x.TemperatureC).Max();
+        }
+        return 0;
+    } 
+
+    public double AvgWeather()
+    {
+        if (WeatherList.Count > 0)
+        {
+            return Math.Round( WeatherList.Select(x => x.TemperatureC).Average(), 2 );
+        }
+        return 0;
+    } 
 }

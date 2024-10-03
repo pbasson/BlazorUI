@@ -1,4 +1,26 @@
 @using Blazor.UI.Models
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Weather Records</td>
+            <td>Min Weather</td>
+            <td>Max Weather</td>
+            <td>Avg Weather</td>
+            <td>Common Summary Weather</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@DataSource.WeatherList.Count</td>
+            <td>@DataSource.MinWeather()</td>
+            <td>@DataSource.MaxWeather()</td>
+            <td>@DataSource.AvgWeather()</td>
+            <td>Summar</td>
+        </tr>
+    </tbody>
+</table>
+
 <table class="table">
     <thead>
         <tr>
@@ -9,7 +31,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var forecast in DataSource)
+        @foreach (var forecast in DataSource.WeatherList)
         {
             <tr>
                 <td>@forecast.DateDisplay</td>
@@ -23,6 +45,6 @@
 
 
 @code {
-    [Parameter] public List<WeatherForecast> DataSource { get; set; } = default!;
+    [Parameter] public WeatherPageVM DataSource { get; set; } = default!;
 
 }
