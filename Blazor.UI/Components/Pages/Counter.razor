@@ -4,9 +4,16 @@
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
-<button class="btn btn-primary" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
+<br />
 
-<table>
+<button class="btn btn-primary btn-space" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
+<br />
+
+<button class="btn btn-primary btn-space" @onclick="IncrementCount"><i class="bi bi-plus-circle"></i> Add Count</button>
+<button class="btn btn-primary btn-space" @onclick="ResetCount"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+<br />
+
+<table class="table ">
     <tr>
         <thead>
             <th>Current Count</th>
@@ -23,23 +30,20 @@
 
 <br />
 
-<button class="btn btn-primary" @onclick="IncrementCount"><i class="bi bi-plus-circle"></i> Add Count</button>
-<button class="btn btn-primary" @onclick="ResetCount"><i class="bi bi-arrow-clockwise"></i> Reset</button>
-
 @code {
     private int currentCount = 0;
     private int highestCount = 0;
     private int totalCount = 0;
-    [Inject] NavigationManager _navManager { get; set; }
+    [Inject] NavigationManager _navManager { get; set; } = default!;
 
     private void IncrementCount()
     {
         currentCount++;
         totalCount++;
         
-        if( totalCount > highestCount )
+        if( currentCount > highestCount )
         {
-            highestCount = totalCount;
+            highestCount = currentCount;
         }
     }
 
