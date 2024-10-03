@@ -20,7 +20,7 @@
 else
 {
     <button class="btn btn-primary btn-space" @onclick="LoadData"><i class="bi bi-arrow-right"></i> Load More</button>
-    <button class="btn btn-primary btn-space" @onclick="ResetData"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+    <button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ResetData() )"><i class="bi bi-arrow-clockwise"></i> Reset</button>
 
     <WeatherGrid DataSource="@DataSource.WeatherList" />
 }
@@ -28,9 +28,7 @@ else
 @code {
     [Inject] NavigationManager _navManager { get; set; } = default!;
     [Inject] WeatherServices _services { get; set; } = default!;
-
     private WeatherPageVM DataSource { get; set; } = new();
-
 
     protected override async Task OnInitializedAsync()
     {
@@ -44,15 +42,6 @@ else
         {
             DataSource.UnsetLoading();
         }
-    }
-
-    private void ResetData()
-    {
-        DataSource.SetLoading();
-
-        DataSource.ResetList();
-
-        DataSource.UnsetLoading();
     }
 
     void NavigateTo()

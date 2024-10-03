@@ -19,4 +19,11 @@ public class WeatherPageVM
     {
         WeatherList = new();
     }
+
+    public void ResetData()
+    {
+        SetLoading();
+        ResetList();
+        UnsetLoading();
+    }
 }
