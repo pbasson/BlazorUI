@@ -13,25 +13,24 @@
 
 <button class="btn btn-primary btn-space" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
 
-
-@if (Loading)
+@if (DataSource.Loading)
 {
     <LoadingComponent />
 }
 else
 {
-    <button class="btn btn-primary btn-space" @onclick="LoadData"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+    <button class="btn btn-primary btn-space" @onclick="LoadData"><i class="bi bi-arrow-right"></i> Load More</button>
+    <button class="btn btn-primary btn-space" @onclick="ResetData"><i class="bi bi-arrow-clockwise"></i> Reset</button>
 
-    <WeatherGrid DataSource="@DataSource" />
+    <WeatherGrid DataSource="@DataSource.WeatherList" />
 }
 
 @code {
     [Inject] NavigationManager _navManager { get; set; } = default!;
     [Inject] WeatherServices _services { get; set; } = default!;
 
-    private List<WeatherForecast> DataSource { get; set; } = new();
+    private WeatherPageVM DataSource { get; set; } = new();
 
-    bool Loading = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,16 +39,24 @@ else
 
     private async Task LoadData()
     {
-        DataSource = await _services.GetWeatherForecastAsync();
-        if(DataSource != null && DataSource.Any() )
+        DataSource.WeatherList = await _services.GetWeatherForecastAsync(DataSource.WeatherList);
+        if(DataSource != null && DataSource.WeatherList != null && DataSource.WeatherList.Any() )
         {
-            Loading = false;
+            DataSource.UnsetLoading();
         }
+    }
+
+    private void ResetData()
+    {
+        DataSource.SetLoading();
+
+        DataSource.ResetList();
+
+        DataSource.UnsetLoading();
     }
 
     void NavigateTo()
     {
-        Console.WriteLine("Navigate To");
         _navManager.NavigateTo("/"); 
     }
 }
