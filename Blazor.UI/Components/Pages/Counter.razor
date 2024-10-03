@@ -1,4 +1,6 @@
 ﻿@page "/Counter"
+@using Blazor.UI.Components.PageComponents
+@using Blazor.UI.Models
 @rendermode InteractiveServer
 
 <PageTitle>Counter</PageTitle>
@@ -9,51 +11,19 @@
 <button class="btn btn-primary btn-space" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
 <br />
 
-<button class="btn btn-primary btn-space" @onclick="IncrementCount"><i class="bi bi-plus-circle"></i> Add Count</button>
-<button class="btn btn-primary btn-space" @onclick="ResetCount"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+<button class="btn btn-primary btn-space" @onclick="@( () => DataSource.IncrementCount() )"><i class="bi bi-plus-circle"></i> Add Count</button>
+<button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ResetCount())"><i class="bi bi-arrow-clockwise"></i> Reset</button>
 <br />
 
-<table class="table ">
-    <tr>
-        <thead>
-            <th>Current Count</th>
-            <th>Highest Count</th>
-            <th>Total Count</th>
-        </thead>
-        <tbody>
-            <td>@currentCount</td>  
-            <td>@highestCount</td>  
-            <td>@totalCount</td>  
-        </tbody>
-    </tr>
-</table>
-
-<br />
+<CounterGrid DataSource="DataSource" />
 
 @code {
-    private int currentCount = 0;
-    private int highestCount = 0;
-    private int totalCount = 0;
     [Inject] NavigationManager _navManager { get; set; } = default!;
 
-    private void IncrementCount()
-    {
-        currentCount++;
-        totalCount++;
-        
-        if( currentCount > highestCount )
-        {
-            highestCount = currentCount;
-        }
-    }
+    Count DataSource = new Count();
 
-    private void ResetCount()
-    {
-        currentCount = 0;
-    }
     void NavigateTo()
     {
-        Console.WriteLine("Navigate To");
         _navManager.NavigateTo("/"); 
     }
 }
