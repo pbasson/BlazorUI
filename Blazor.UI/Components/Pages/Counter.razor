@@ -1,0 +1,29 @@
+﻿@page "/Counter"
+@using Blazor.UI.Components.PageComponents
+@using Blazor.UI.Models
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+<br />
+
+<button class="btn btn-primary btn-space" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
+<br />
+
+<button class="btn btn-primary btn-space" @onclick="@( () => DataSource.IncrementCount() )"><i class="bi bi-plus-circle"></i> Add Count</button>
+<button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ResetCount())"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+<br />
+
+<CounterGrid DataSource="DataSource" />
+
+@code {
+    [Inject] NavigationManager _navManager { get; set; } = default!;
+
+    Count DataSource = new Count();
+
+    void NavigateTo()
+    {
+        _navManager.NavigateTo("/"); 
+    }
+}
