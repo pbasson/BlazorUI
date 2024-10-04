@@ -16,7 +16,7 @@
                 <td>@forecast.DateDisplay</td>
                 <td>@forecast.TemperatureC</td>
                 <td>@forecast.TemperatureF</td>
-                <td>@forecast.GetSummaryTableDisplay()</td>
+                <td>@((MarkupString) forecast.GetSummaryTableDisplay() )</td>
             </tr>
         }
     </tbody>

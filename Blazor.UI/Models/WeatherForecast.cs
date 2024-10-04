@@ -18,7 +18,7 @@ namespace Blazor.UI.Models
         {
             if(WeatherSummary != null)   
             {
-                return $"({WeatherSummary.Name} - {WeatherStatics.GetWeatherType(WeatherSummary.Type).Name })"; 
+                return $"{WeatherStatics.GetWeatherType(WeatherSummary.Type).Icon} {WeatherSummary.Name}"; 
             }
 
             return string.Empty;

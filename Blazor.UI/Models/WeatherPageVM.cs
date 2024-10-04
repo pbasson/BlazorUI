@@ -79,16 +79,5 @@ public class WeatherPageVM
 
         return string.Empty;
     }
-
-    public string GetSummaryDisplayIcon()
-    {
-        if(WeatherList.Count > 0)
-        {
-            
-        }
-
-        return string.Empty;
-    }
-
  
 }

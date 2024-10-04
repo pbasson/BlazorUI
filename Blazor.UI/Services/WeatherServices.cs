@@ -32,7 +32,6 @@ namespace Blazor.UI.Services
                 end += forecasts.Count;
             }
 
-
             return Enumerable.Range(start, end).Select(index => new WeatherForecast
             {
                 Date = DateTime.Today.Date.AddDays(index),
