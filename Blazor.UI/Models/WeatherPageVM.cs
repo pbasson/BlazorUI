@@ -1,3 +1,5 @@
+using Blazor.UI.Helpers;
+
 namespace Blazor.UI.Models;
 
 public class WeatherPageVM
@@ -58,18 +60,17 @@ public class WeatherPageVM
     {
         if(WeatherList.Count > 0)   
         {
-            Console.WriteLine("GetSummaryDisplay");
-            var test1 = WeatherList.Select(x => x.WeatherSummary.Type).ToList();
-            var test2 = test1.Max();
+            var getSummaryType = WeatherList.Select(x => x.WeatherSummary.Type).ToList();
+            var getGroupSummary = getSummaryType.GroupBy(x => x)
+                .Select(x => new { Element = x.Key, Counter = x.Count() } )
+                .OrderByDescending( x => x.Counter).ToList();
 
-            Console.WriteLine($"{test1.Count} {test2}");
-            var test = WeatherList.GroupBy(x => x).Where(y => y.Count() > 1).Select(x =>x.Key).ToList();    
-            test.ForEach(x =>
-            {
-                Console.WriteLine($"{x.Date}: {x.TemperatureC}:  " );
-                // Console.WriteLine($"{x.Key.DateDisplay}: {x.Key.TemperatureC}" );
-            } );
-            
+            // getGroupSummary.ForEach( x => {
+            //     Console.WriteLine($"{x.Element} {x.Counter}");
+            // } );
+
+            var getWeatherType = WeatherStatics.GetWeatherType(getGroupSummary[0].Element);
+            return $"{getWeatherType.Name}: {getGroupSummary[0].Counter}";
         }
 
         return string.Empty;
