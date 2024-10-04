@@ -53,4 +53,17 @@ public class WeatherPageVM
         }
         return 0;
     } 
+
+    public string GetSummaryDisplay()
+    {
+        if(WeatherList.Count > 0)   
+        {
+            var test = WeatherList.GroupBy(x => x).OrderBy(x => x.Key.WeatherSummary.Type).ToList();
+            Console.WriteLine("", test);
+        }
+
+        return string.Empty;
+    }
+
+ 
 }

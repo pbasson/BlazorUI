@@ -1,3 +1,4 @@
+using Blazor.UI.Helpers;
 using Blazor.UI.Models;
 
 namespace Blazor.UI.Services
@@ -33,14 +34,15 @@ namespace Blazor.UI.Services
                 end += forecasts.Count;
             }
 
+
             return Enumerable.Range(start, end).Select(index => new WeatherForecast
             {
                 Date = DateTime.Today.Date.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = WeatherSummary[Random.Shared.Next(WeatherSummary.Length)]
+                WeatherSummary = WeatherStatics.WeatherRange[Random.Shared.Next(WeatherStatics.WeatherRange.Count)],
             }).ToList();
         }
 
-        private readonly string[] WeatherSummary = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
+
     }
 }
