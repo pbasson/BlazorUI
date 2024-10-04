@@ -1,0 +1,28 @@
+﻿@using Blazor.UI.Models
+
+<h3>Weather Summary! </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Weather Records</td>
+            <td>Min Weather</td>
+            <td>Max Weather</td>
+            <td>Avg Weather</td>
+            <td>Common Summary Weather</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@DataSource.WeatherList.Count</td>
+            <td>@DataSource.MinWeather()</td>
+            <td>@DataSource.MaxWeather()</td>
+            <td>@DataSource.AvgWeather()</td>
+            <td>@DataSource.GetSummaryDisplay()</td>
+        </tr>
+    </tbody>
+</table>
+
+@code {
+    [Parameter] public WeatherPageVM DataSource { get; set; } = default!;
+
+}

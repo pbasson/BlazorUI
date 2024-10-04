@@ -19,9 +19,7 @@ namespace Blazor.UI.Services
             {
                 throw;
             }
-
         }
-
 
         public List<WeatherForecast> SetWeatherForecast(List<WeatherForecast>? forecasts = null )
         {

@@ -23,6 +23,8 @@ else
     <button class="btn btn-primary btn-space" @onclick="LoadData"><i class="bi bi-arrow-right"></i> Load More</button>
     <button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ResetData() )"><i class="bi bi-arrow-clockwise"></i> Reset</button>
 
+    <WeatherSummaryGrid DataSource="@DataSource" />
+    
     <WeatherGrid DataSource="@DataSource" />
 }
 
