@@ -70,7 +70,7 @@ public class WeatherPageVM
             // } );
 
             var getWeatherType = WeatherStatics.GetWeatherType(getGroupSummary[0].Element);
-            return $"{getWeatherType.Name}: {getGroupSummary[0].Counter}";
+            return $"{getWeatherType.Name}: {getGroupSummary[0].Counter} Days";
         }
 
         return string.Empty;
