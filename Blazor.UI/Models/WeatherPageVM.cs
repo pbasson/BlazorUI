@@ -58,8 +58,18 @@ public class WeatherPageVM
     {
         if(WeatherList.Count > 0)   
         {
-            var test = WeatherList.GroupBy(x => x).OrderBy(x => x.Key.WeatherSummary.Type).ToList();
-            Console.WriteLine("", test);
+            Console.WriteLine("GetSummaryDisplay");
+            var test1 = WeatherList.Select(x => x.WeatherSummary.Type).ToList();
+            var test2 = test1.Max();
+
+            Console.WriteLine($"{test1.Count} {test2}");
+            var test = WeatherList.GroupBy(x => x).Where(y => y.Count() > 1).Select(x =>x.Key).ToList();    
+            test.ForEach(x =>
+            {
+                Console.WriteLine($"{x.Date}: {x.TemperatureC}:  " );
+                // Console.WriteLine($"{x.Key.DateDisplay}: {x.Key.TemperatureC}" );
+            } );
+            
         }
 
         return string.Empty;
