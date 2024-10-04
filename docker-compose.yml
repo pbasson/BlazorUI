@@ -1,4 +1,3 @@
-
 services:
   blazorui:
     image: blazor.ui
