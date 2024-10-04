@@ -13,10 +13,10 @@ public static class PageStatics
 
 public static class WeatherStatics 
 {
-    public static List<KeyTable> WeatherType { get; set; } = new List<KeyTable>{  
-        new KeyTable{ Id = 1, Name = "Cold"},
-        new KeyTable{ Id = 2, Name = "Neutral"},
-        new KeyTable{ Id = 3, Name = "Hot"},
+    public static List<KeyIconTable> WeatherType { get; set; } = new List<KeyIconTable>{  
+        new KeyIconTable{ Id = 1, Name = "Cold", Icon = "<i class=\"bi bi-snow\"></i>" },
+        new KeyIconTable{ Id = 2, Name = "Neutral", Icon = "<i class=\"bi bi-moisture\"></i>"},
+        new KeyIconTable{ Id = 3, Name = "Hot", Icon = "<i class=\"bi bi-sun\"></i>"},
     };
 
     public static List<KeyTypeTable> WeatherRange = new List<KeyTypeTable>
@@ -32,7 +32,7 @@ public static class WeatherStatics
         new KeyTypeTable{ Id = 9, Name = "Scorching", Type = 3  },    
     };
 
-    public static KeyTable GetWeatherType(int typeId)
+    public static KeyIconTable GetWeatherType(int typeId)
     {
         var getData = WeatherType.FirstOrDefault(x => x.Id == typeId);
         if(getData != null)

@@ -1,6 +1,6 @@
 ﻿@using Blazor.UI.Models
 
-<h3>Weather Summary! </h3>
+<h3> <i class="bi bi-thermometer-sun"></i> Weather Summary! </h3>
 <table class="table">
     <thead>
         <tr>
@@ -8,7 +8,7 @@
             <td>Min Weather</td>
             <td>Max Weather</td>
             <td>Avg Weather</td>
-            <td>Common Summary Weather</td>
+            <td>Most Common Weather</td>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
             <td>@DataSource.MinWeather()</td>
             <td>@DataSource.MaxWeather()</td>
             <td>@DataSource.AvgWeather()</td>
-            <td>@DataSource.GetSummaryDisplay()</td>
+            <td>@((MarkupString)DataSource.GetSummaryDisplay() )</td>
         </tr>
     </tbody>
 </table>
