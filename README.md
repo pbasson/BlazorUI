@@ -8,20 +8,19 @@ Blazor Framework demonstration implementing components with clean, scalable code
 -----------
 ## Features
 
-Features such as 
-
-| Technology | Version |
-|---|---|
-| ASP.NET | 8.0 |
-| Blazor Serverside | - |
-| Radzen | - |
-
+### Technology
 
 | Languages |
 |---|
 | C# |
 | CSS |
 | HTML |
+
+| Technology | Version |
+|---|---|
+| ASP.NET | 8.0 |
+| Blazor Serverside | - |
+| Radzen | - |
 
 -----------
 ## Usage
@@ -41,7 +40,7 @@ Project can be executed in any of the following Methods. Prefered way would via 
     2. Run Container:
         - ``` docker run --rm -it -p 5147:5147 Blazor.UI:latest ```
 
-### Dockerfile
+### Docker Compose
 
 1. From Project Directory, Execute Docker Compose 
     1. Execute Docker Compose with Build 
