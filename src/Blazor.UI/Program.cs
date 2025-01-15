@@ -1,6 +1,6 @@
 using Blazor.UI.Services;
 using Blazor.UI.Components;
-using ElmahCore.Mvc;
+using Blazor.UI.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 

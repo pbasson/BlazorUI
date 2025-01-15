@@ -8,7 +8,14 @@ public static class PageStatics
 
     public static string WeatherPageDetails { get; set; } = "Page Demonstrates Data Loading and Reseting of the Weather."; 
 
+}
 
+public readonly struct PathVariables
+{
+    public readonly static string Home = "/";
+    public readonly static string Weather = "Weather";
+    public readonly static string Counter = "Counter";
+    public readonly static string Transaction = "Transaction";
 }
 
 public static class WeatherStatics 

@@ -1,5 +1,6 @@
 ﻿@page "/"
 @page "/home"
+@using Blazor.UI.Helpers
 @rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
@@ -7,8 +8,9 @@
 <h2>Welcome to Blazor UI</h2>
 <p>By Preetpal Basson (Developed & Designed)</p>
 
-<button class="btn btn-primary" @onclick="@( () => NavigateToPage("Weather") )" >Weather </button>
-<button class="btn btn-primary" @onclick="@( () => NavigateToPage("Counter") )" >Counter </button>
+<button class="btn btn-primary" @onclick="@( () => NavigateToPage(@PathVariables.Weather) )" >Weather </button>
+<button class="btn btn-primary" @onclick="@( () => NavigateToPage(@PathVariables.Counter) )" >Counter </button>
+<button class="btn btn-primary" @onclick="@( () => NavigateToPage(@PathVariables.Transaction) )" >Transaction </button>
 
 @code
 {
@@ -17,12 +19,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Console.WriteLine("Testing");
-    }
-
-    private void Testing()
-    {
-        Console.WriteLine("Button Test");
+        Console.WriteLine("Home Page Loaded");
     }
 
     void NavigateToPage(string navigate)

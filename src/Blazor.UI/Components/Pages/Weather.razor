@@ -33,6 +33,7 @@ else
 @code {
     [Inject] NavigationManager _navManager { get; set; } = default!;
     [Inject] WeatherServices _services { get; set; } = default!;
+
     private WeatherPageVM DataSource { get; set; } = new();
     
     private List<CRUDTransaction> Transactions { get; set; } = new();

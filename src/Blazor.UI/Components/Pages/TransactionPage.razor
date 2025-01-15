@@ -1,0 +1,15 @@
+﻿@page "/Transaction"
+@using Blazor.UI.Components.TransactionComponents
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<h2>Transaction Page</h2>
+
+@* <button class="btn btn-primary btn-space" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button> *@
+
+
+<TransactionGrid />
+
+@code {
+
+}
