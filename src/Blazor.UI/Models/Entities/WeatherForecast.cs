@@ -1,7 +1,6 @@
-using Blazor.UI.Components.Pages;
 using Blazor.UI.Helpers;
 
-namespace Blazor.UI.Models
+namespace Blazor.UI.Models.Entities
 {
     public class WeatherForecast
     {

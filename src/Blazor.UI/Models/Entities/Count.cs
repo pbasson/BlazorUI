@@ -1,6 +1,4 @@
-using System;
-
-namespace Blazor.UI.Models;
+namespace Blazor.UI.Models.Entities;
 
 public class Count
 {

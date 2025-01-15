@@ -1,0 +1,23 @@
+﻿@using Blazor.UI.Models.VMs
+<h3>TransactionPage</h3>
+
+<table>
+    <tr>
+        <thead>
+            <td>Id</td>
+            <td>name</td>
+        </thead>
+    </tr>
+
+    @foreach(var item in DataSource.DataSource) {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+        </tr>
+    }        
+
+</table>
+
+@code {
+    public TransactionVM DataSource {get; set;}
+}

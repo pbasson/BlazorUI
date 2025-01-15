@@ -1,21 +1,11 @@
 using Blazor.UI.Helpers;
+using Blazor.UI.Models.Entities;
 
-namespace Blazor.UI.Models;
+namespace Blazor.UI.Models.VMs;
 
-public class WeatherPageVM
+public class WeatherPageVM : HeaderVM
 {
-    public bool Loading = true;
     public List<WeatherForecast> WeatherList { get; set; } = new();
-
-    public void SetLoading()
-    {
-        Loading = true;
-    } 
-
-    public void UnsetLoading()
-    {
-        Loading = false;
-    } 
 
     public void ResetList()
     {

@@ -1,5 +1,5 @@
 using Blazor.UI.Helpers;
-using Blazor.UI.Models;
+using Blazor.UI.Models.Entities;
 
 namespace Blazor.UI.Services
 {
@@ -13,7 +13,6 @@ namespace Blazor.UI.Services
                 weatherForecasts = SetWeatherForecast(datasource);
 
                 return weatherForecasts;
-
             }
             catch (Exception)
             {
@@ -39,7 +38,5 @@ namespace Blazor.UI.Services
                 WeatherSummary = WeatherStatics.WeatherRange[Random.Shared.Next(WeatherStatics.WeatherRange.Count)],
             }).ToList();
         }
-
-
     }
 }

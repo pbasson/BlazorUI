@@ -8,5 +8,8 @@
   <ItemGroup>
     <PackageReference Include="ElmahCore" Version="2.1.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components/TransactionComponents/" />
+  </ItemGroup>
 
 </Project>

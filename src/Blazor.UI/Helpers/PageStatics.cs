@@ -1,4 +1,4 @@
-using Blazor.UI.Models;
+using Blazor.UI.Models.Entities;
 
 namespace Blazor.UI.Helpers;
 

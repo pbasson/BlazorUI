@@ -9,7 +9,7 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY . .
+COPY ./src . 
 RUN dotnet restore "Blazor.UI/Blazor.UI.csproj"
 RUN dotnet build "Blazor.UI/Blazor.UI.csproj" -c $configuration -o /app/build
 

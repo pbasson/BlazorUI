@@ -1,6 +1,6 @@
 using Blazor.UI.Services;
 using Blazor.UI.Components;
-// using ElmahCore.Mvc;
+using ElmahCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 
 
 builder.Services.AddScoped<WeatherServices>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
@@ -21,7 +22,7 @@ var app = builder.Build();
 //     app.UseHsts();
 // }
 
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();

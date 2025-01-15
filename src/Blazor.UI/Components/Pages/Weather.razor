@@ -2,6 +2,8 @@
 @using Blazor.UI.Helpers
 @using Blazor.UI.Models
 @using Blazor.UI.Components.PageComponents
+@using Blazor.UI.Models.Entities
+@using Blazor.UI.Models.VMs
 @using Blazor.UI.Services
 @attribute [StreamRendering]
 @rendermode InteractiveServer
@@ -32,7 +34,8 @@ else
     [Inject] NavigationManager _navManager { get; set; } = default!;
     [Inject] WeatherServices _services { get; set; } = default!;
     private WeatherPageVM DataSource { get; set; } = new();
-
+    
+    private List<CRUDTransaction> Transactions { get; set; } = new();
     protected override async Task OnInitializedAsync()
     {
         await LoadData();

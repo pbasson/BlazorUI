@@ -3,7 +3,7 @@ services:
     image: blazor.ui
     build: 
       context: .
-      dockerfile: Blazor.UI/Dockerfile
+      dockerfile: src/Blazor.UI/Dockerfile
     ports:
       - 5147:5147
     restart: always
