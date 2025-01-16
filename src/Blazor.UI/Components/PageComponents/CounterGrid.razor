@@ -1,0 +1,20 @@
+﻿@using Blazor.Core.Models.Entities
+<table class="table ">
+    <tr>
+        <thead>
+            <th>Current Count</th>
+            <th>Highest Count</th>
+            <th>Total Count</th>
+        </thead>
+        <tbody>
+            <td>@DataSource.CurrentCount</td>  
+            <td>@DataSource.HighestCount</td>  
+            <td>@DataSource.TotalCount</td>  
+        </tbody>
+    </tr>
+</table>
+
+@code {
+    [Parameter] public Count DataSource {get; set;} = default!; 
+
+}

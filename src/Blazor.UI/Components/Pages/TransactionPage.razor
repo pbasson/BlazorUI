@@ -1,0 +1,39 @@
+﻿@page "/Transaction"
+@using Blazor.Core.Models.VMs
+@using Blazor.UI.Components.PageComponents
+@using Blazor.UI.Components.TransactionComponents
+@using Blazor.UI.Services
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<h2>Transaction Page</h2>
+
+<NavigateHome />
+
+@if (DataSource.Loading)
+{
+    <LoadingComponent />
+}
+else
+{
+    <TransactionGrid DataSource="@DataSource" />
+}
+
+
+@code {
+    [Inject] TransactionService _services { get; set; } = default!;
+
+    private TransactionVM DataSource { get; set; } = new();
+    
+    protected override async Task OnInitializedAsync() {
+        DataSource.DataSet = await _services.GetRecords();
+        if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
+        {
+            DataSource.UnsetLoading();
+        }
+    }
+    }
+
+    
+
+}

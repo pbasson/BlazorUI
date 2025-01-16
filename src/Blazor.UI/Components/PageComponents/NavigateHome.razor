@@ -1,0 +1,10 @@
+﻿<button class="btn btn-primary btn-space" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
+
+@code {
+    [Inject] NavigationManager _navManager { get; set; } = default!;
+    
+    void NavigateTo()
+    {
+        _navManager.NavigateTo("/"); 
+    }
+}

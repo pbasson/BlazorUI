@@ -1,0 +1,24 @@
+﻿@page "/"
+@page "/home"
+@using Blazor.Core.Helpers
+@using Blazor.UI.Components.PageComponents
+@using Blazor.UI.Helpers
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h2>Welcome to Blazor UI</h2>
+<p>By Preetpal Basson (Developed & Designed)</p>
+
+<NavigateToPage Path=@PathVariables.Weather />
+<NavigateToPage Path=@PathVariables.Counter />
+<NavigateToPage Path=@PathVariables.Transaction />
+
+@code
+{
+    protected async override Task OnInitializedAsync()
+    {
+        Console.WriteLine("Home Page Loaded");
+    }
+
+}

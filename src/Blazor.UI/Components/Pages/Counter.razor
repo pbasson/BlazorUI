@@ -1,0 +1,25 @@
+﻿@page "/Counter"
+@using Blazor.Core.Models
+@using Blazor.Core.Models.Entities
+@using Blazor.UI.Components.PageComponents
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+<br />
+
+<NavigateHome />
+<br />
+
+<button class="btn btn-primary btn-space" @onclick="@( () => DataSource.IncrementCount() )"><i class="bi bi-plus-circle"></i> Add Count</button>
+<button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ResetCount())"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+<br />
+
+<CounterGrid DataSource="DataSource" />
+
+@code {
+    Count DataSource = new Count();
+
+ 
+}

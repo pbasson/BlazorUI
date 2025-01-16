@@ -1,0 +1,28 @@
+﻿@using Blazor.Core.Models.VMs
+
+<h3> <i class="bi bi-thermometer-sun"></i> Weather Summary! </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Weather Records</td>
+            <td>Min Weather</td>
+            <td>Max Weather</td>
+            <td>Avg Weather</td>
+            <td>Most Common Weather</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@DataSource.WeatherList.Count</td>
+            <td>@DataSource.MinWeather()</td>
+            <td>@DataSource.MaxWeather()</td>
+            <td>@DataSource.AvgWeather()</td>
+            <td>@((MarkupString)DataSource.GetSummaryDisplay() )</td>
+        </tr>
+    </tbody>
+</table>
+
+@code {
+    [Parameter] public WeatherPageVM DataSource { get; set; } = default!;
+
+}

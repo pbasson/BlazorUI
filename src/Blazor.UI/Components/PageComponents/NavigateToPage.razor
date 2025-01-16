@@ -1,0 +1,15 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<button class="btn btn-primary" @onclick="@( () => NavigateTo(Path) )" > @Path </button>
+
+@code {
+    [Inject] NavigationManager _navManager { get; set; } = default!;
+    [Parameter] [Required] public string Path {get; set;}
+    
+  
+    void NavigateTo(string navigate)
+    {
+        Console.WriteLine($"Navigate To {navigate}");
+        _navManager.NavigateTo($"/{navigate}"); 
+    }
+}
