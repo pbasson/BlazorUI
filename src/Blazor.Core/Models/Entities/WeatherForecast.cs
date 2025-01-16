@@ -1,6 +1,6 @@
-using Blazor.UI.Helpers;
+using Blazor.Core.Constants;
 
-namespace Blazor.UI.Models.Entities
+namespace Blazor.Core.Models.Entities
 {
     public class WeatherForecast
     {

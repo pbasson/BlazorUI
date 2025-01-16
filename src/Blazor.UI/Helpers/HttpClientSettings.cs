@@ -1,3 +1,5 @@
+using Blazor.Core.Helpers;
+
 namespace Blazor.UI.Helpers
 {
     public class HttpClientSettings

@@ -1,4 +1,4 @@
-namespace Blazor.UI.Helpers;
+namespace Blazor.Core.Helpers;
 
 public static class PageStatics
 {

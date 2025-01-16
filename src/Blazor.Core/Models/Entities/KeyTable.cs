@@ -1,4 +1,4 @@
-namespace Blazor.UI.Models.Entities;
+namespace Blazor.Core.Models.Entities;
 
 public class KeyTable
 {

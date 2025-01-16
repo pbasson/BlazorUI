@@ -1,4 +1,4 @@
-namespace Blazor.UI.Models.VMs;
+namespace Blazor.Core.Models.VMs;
 
 public class HeaderVM
 {

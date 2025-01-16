@@ -1,16 +1,12 @@
 using Newtonsoft.Json;
 using Blazor.UI.Helpers;
-using Blazor.UI.Models.Entities;
+using Blazor.Core.Models.Entities;
+using Blazor.Core.Constants;
 
 namespace Blazor.UI.Services;
 
 public class TransactionService
 {
-
-    public TransactionService()
-    {
-    }    
-
     public async Task<List<CRUDTransaction>> GetRecords() {
         try
         {
@@ -33,5 +29,4 @@ public class TransactionService
             throw;
         }
     }
-
 }

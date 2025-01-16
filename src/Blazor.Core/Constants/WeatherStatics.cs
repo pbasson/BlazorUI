@@ -1,6 +1,6 @@
-using Blazor.UI.Models.Entities;
+using Blazor.Core.Models.Entities;
 
-namespace Blazor.UI.Helpers;
+namespace Blazor.Core.Constants;
 
 public static class WeatherStatics 
 {

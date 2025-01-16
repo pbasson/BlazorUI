@@ -1,4 +1,4 @@
-namespace Blazor.UI.Helpers;
+namespace Blazor.Core.Constants;
 
 public readonly struct TransactionStatics
 {

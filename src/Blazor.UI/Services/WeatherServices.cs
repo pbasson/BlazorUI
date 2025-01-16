@@ -1,5 +1,5 @@
-using Blazor.UI.Helpers;
-using Blazor.UI.Models.Entities;
+using Blazor.Core.Constants;
+using Blazor.Core.Models.Entities;
 
 namespace Blazor.UI.Services
 {

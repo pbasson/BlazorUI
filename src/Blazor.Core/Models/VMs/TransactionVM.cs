@@ -1,6 +1,6 @@
-using Blazor.UI.Models.Entities;
+using Blazor.Core.Models.Entities;
 
-namespace Blazor.UI.Models.VMs;
+namespace Blazor.Core.Models.VMs;
 
 public class TransactionVM : HeaderVM
 {

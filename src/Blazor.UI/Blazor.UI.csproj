@@ -12,5 +12,8 @@
   <ItemGroup>
     <Folder Include="Components/TransactionComponents/" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Blazor.Core/Blazor.Core.csproj" />
+  </ItemGroup>
 
 </Project>
