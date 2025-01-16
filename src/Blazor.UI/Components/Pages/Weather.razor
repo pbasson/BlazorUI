@@ -14,7 +14,7 @@
 
 <p>@PageStatics.WeatherPageDetails</p>
 
-<button class="btn btn-primary btn-space" @onclick="@( () => NavigateTo() )"  ><i class="bi bi-arrow-90deg-left"></i> Back To Home  </button>
+<NavigateHome />
 
 @if (DataSource.Loading)
 {
@@ -31,12 +31,10 @@ else
 }
 
 @code {
-    [Inject] NavigationManager _navManager { get; set; } = default!;
     [Inject] WeatherServices _services { get; set; } = default!;
 
     private WeatherPageVM DataSource { get; set; } = new();
     
-    private List<CRUDTransaction> Transactions { get; set; } = new();
     protected override async Task OnInitializedAsync()
     {
         await LoadData();
@@ -51,8 +49,4 @@ else
         }
     }
 
-    void NavigateTo()
-    {
-        _navManager.NavigateTo("/"); 
-    }
 }

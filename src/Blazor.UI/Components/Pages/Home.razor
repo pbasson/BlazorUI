@@ -1,5 +1,6 @@
 ﻿@page "/"
 @page "/home"
+@using Blazor.UI.Components.PageComponents
 @using Blazor.UI.Helpers
 @rendermode InteractiveServer
 
@@ -8,23 +9,15 @@
 <h2>Welcome to Blazor UI</h2>
 <p>By Preetpal Basson (Developed & Designed)</p>
 
-<button class="btn btn-primary" @onclick="@( () => NavigateToPage(@PathVariables.Weather) )" >Weather </button>
-<button class="btn btn-primary" @onclick="@( () => NavigateToPage(@PathVariables.Counter) )" >Counter </button>
-<button class="btn btn-primary" @onclick="@( () => NavigateToPage(@PathVariables.Transaction) )" >Transaction </button>
+<NavigateToPage Path=@PathVariables.Weather />
+<NavigateToPage Path=@PathVariables.Counter />
+<NavigateToPage Path=@PathVariables.Transaction />
 
 @code
 {
-    [Inject] NavigationManager _navManager { get; set; } = default!;
-
-
     protected async override Task OnInitializedAsync()
     {
         Console.WriteLine("Home Page Loaded");
     }
 
-    void NavigateToPage(string navigate)
-    {
-        Console.WriteLine($"Navigate To {navigate}");
-        _navManager.NavigateTo($"/{navigate}"); 
-    }
 }
