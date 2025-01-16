@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout
+    - name: Build the Docker image
+      run: docker build . --file ./src/Blazor.UI/Dockerfile --tag my-image-name:$(date +%s)
