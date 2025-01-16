@@ -4,7 +4,7 @@ namespace Blazor.Core.Models.VMs;
 
 public class TransactionVM : HeaderVM
 {
-    public List<CRUDTransaction> DataSet { get; set; } = new();
+    public List<CRUDTransactionDTO> DataSet { get; set; } = new();
 
     public void ResetList()
     {

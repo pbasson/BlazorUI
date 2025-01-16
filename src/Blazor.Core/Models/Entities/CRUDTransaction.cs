@@ -1,6 +1,6 @@
 namespace Blazor.Core.Models.Entities;
 
-public class CRUDTransaction
+public class CRUDTransactionDTO
 {
     public int Id { get; set; }
     public string? Name { get; set; }
