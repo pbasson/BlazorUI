@@ -26,7 +26,7 @@ else
     private TransactionVM DataSource { get; set; } = new();
     
     protected override async Task OnInitializedAsync() {
-        DataSource.DataSet = await _services.GetRecords();
+        DataSource.DataSet = await _services.GetAllRecordsAsync();
         if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
         {
             DataSource.UnsetLoading();
