@@ -4,9 +4,11 @@ namespace Blazor.UI.Helpers
     {
         public static IConfiguration AppSetting { get; }
 
-        static ConfigHandler()
+        // Including EnvVariables allows the loading and usage of Env file values. 
+        static ConfigHandler( )
         {
-            AppSetting = new ConfigurationBuilder().AddJsonFile(API_Statics.AppSettingsFile).Build();
+            AppSetting = new ConfigurationBuilder().AddEnvironmentVariables().Build();
         }
     }
+
 }

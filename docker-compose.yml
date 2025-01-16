@@ -7,3 +7,5 @@ services:
     ports:
       - 5147:5147
     restart: always
+    env_file: 
+    - env/coreapi-dev.env

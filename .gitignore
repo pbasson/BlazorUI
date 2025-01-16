@@ -3,3 +3,5 @@
 [Oo]bj
 
 .vs/
+env
+*.env

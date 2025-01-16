@@ -9,4 +9,5 @@ public readonly struct TransactionStatics
 public readonly struct TransactionNavigation
 {
     public readonly static string GetAllRecords = "CRUDTransaction/GetAllRecords";
+    public readonly static string GetRecordById = "CRUDTransaction/GetRecordById/{Id:int}";
 }
