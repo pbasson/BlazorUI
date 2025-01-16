@@ -1,7 +1,6 @@
-using System.Text.Json;
+using Newtonsoft.Json;
 using Blazor.UI.Helpers;
 using Blazor.UI.Models.Entities;
-using Microsoft.Net.Http.Headers;
 
 namespace Blazor.UI.Services;
 
@@ -32,20 +31,21 @@ public class TransactionService
 
                 if (getrecord.IsSuccessStatusCode )
                 {
-                    var context = await getrecord.Content.ReadAsStreamAsync();
-                    var test = await JsonSerializer.DeserializeAsync<List<CRUDTransaction>>(context);    
-                    if (test != null && test.Any())
+                    var context = await getrecord.Content.ReadAsStringAsync();
+                    var getRecord = JsonConvert.DeserializeObject<List<CRUDTransaction>>(context);
+                    
+                    if (getRecord != null && getRecord.Any())
                     {
-                        test.ForEach( x => {
+                        getRecord.ForEach( x => {
                             Console.WriteLine($"TEST: {x.Id} {x.Name}");
                         });
+                        return getRecord;
                     }
-                    return test;
                 }
 
                 return new();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 throw;
             }
