@@ -13,6 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout
+    - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . --file ./src/Blazor.UI/Dockerfile --tag my-image-name:$(date +%s)
