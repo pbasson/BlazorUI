@@ -10,12 +10,30 @@
 
 <NavigateHome />
 
-<TransactionGrid />
+@if (DataSource.Loading)
+{
+    <LoadingComponent />
+}
+else
+{
+    <TransactionGrid DataSource="@DataSource" />
+}
+
 
 @code {
     [Inject] TransactionService _services { get; set; } = default!;
 
     private TransactionVM DataSource { get; set; } = new();
+    
+    protected override async Task OnInitializedAsync() {
+        DataSource.DataSet = await _services.GetRecords();
+        if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
+        {
+            DataSource.UnsetLoading();
+        }
+    }
+    }
+
     
 
 }

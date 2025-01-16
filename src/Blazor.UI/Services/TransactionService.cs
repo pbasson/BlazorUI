@@ -1,18 +1,22 @@
 using System.Text.Json;
-using Blazor.UI.Models;
+using Blazor.UI.Helpers;
 using Blazor.UI.Models.Entities;
+using Microsoft.Net.Http.Headers;
 
 namespace Blazor.UI.Services;
 
 public class TransactionService
 {
         public HttpClient _client; 
-        // private readonly IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
+        private string? ApiURL {get; set;} 
+        private string? ApiKey {get; set;} 
+
 
         public async Task<List<CRUDTransaction>> GetRecords() {
             try
             {
-                var getrecord = await _client.GetAsync("api/CRUDTransaction/GetAllRecords");
+                var getrecord = await _client.GetAsync(TransactionNavigation.GetAllRecords);
 
                 if (getrecord.IsSuccessStatusCode )
                 {

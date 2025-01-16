@@ -19,12 +19,7 @@
 <CounterGrid DataSource="DataSource" />
 
 @code {
-    [Inject] NavigationManager _navManager { get; set; } = default!;
-
     Count DataSource = new Count();
 
-    void NavigateTo()
-    {
-        _navManager.NavigateTo("/"); 
-    }
+ 
 }

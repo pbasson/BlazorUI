@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 
 
 builder.Services.AddScoped<WeatherServices>();
+builder.Services.AddScoped<TransactionService>();
 builder.Services.AddHttpClient();
 
 var app = builder.Build();

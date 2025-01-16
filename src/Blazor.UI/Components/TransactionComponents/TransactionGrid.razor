@@ -9,7 +9,7 @@
         </thead>
     </tr>
 
-    @foreach(var item in DataSource.DataSource) {
+    @foreach(var item in DataSource.DataSet) {
         <tr>
             <td>@item.Id</td>
             <td>@item.Name</td>
@@ -19,5 +19,5 @@
 </table>
 
 @code {
-    public TransactionVM DataSource {get; set;}
+    [Parameter] public TransactionVM DataSource {get; set;}
 }
