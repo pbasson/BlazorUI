@@ -33,7 +33,18 @@ public class TransactionService : ITransactionService
 
     public async Task<CRUDTransactionDTO> GetRecordByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var getrecord = await new HttpClientSettings().GetRecordByIdAsync(TransactionNavigation.GetRecordById, id);
+        if (getrecord.IsSuccessStatusCode )
+        {
+            var context = await getrecord.Content.ReadAsStringAsync();
+            var getRecord = JsonConvert.DeserializeObject<CRUDTransactionDTO>(context);
+            
+            if (getRecord != null )
+            {
+                return getRecord;
+            }
+        }
+        return new();
     }
 
     public async Task<bool> CreateRecordAsync(CRUDTransactionDTO dto)

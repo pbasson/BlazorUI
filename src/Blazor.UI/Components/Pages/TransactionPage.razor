@@ -1,5 +1,5 @@
 ﻿@page "/Transaction"
-@using Blazor.Core.Models.VMs
+@using Blazor.Core.Models.Settings
 @using Blazor.UI.Components.PageComponents
 @using Blazor.UI.Components.TransactionComponents
 @using Blazor.UI.Services
@@ -16,24 +16,27 @@
 }
 else
 {
-    <TransactionGrid DataSource="@DataSource" />
+    
+    <TransactionGrid DataSet="@DataSource.DataSet" />
+    <br />
+
+    @* <TransactionRecord DataSet="@DataSource.DataRecord" /> *@
 }
 
 
 @code {
     [Inject] TransactionService _services { get; set; } = default!;
 
-    private TransactionVM DataSource { get; set; } = new();
+    private TransactionSettings DataSource { get; set; } = new();
     
     protected override async Task OnInitializedAsync() {
         DataSource.DataSet = await _services.GetAllRecordsAsync();
+        @* DataSource.DataRecord = await _services.GetRecordByIdAsync(1); *@
         if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
         {
             DataSource.UnsetLoading();
         }
-    }
-    }
 
-    
-
+    }
 }
+

@@ -1,9 +1,9 @@
 using Blazor.Core.Constants;
 using Blazor.Core.Models.Entities;
 
-namespace Blazor.Core.Models.VMs;
+namespace Blazor.Core.Models.Settings;
 
-public class WeatherPageVM : HeaderVM
+public class WeatherSettings : HeaderSettings
 {
     public List<WeatherForecast> WeatherList { get; set; } = new();
 

@@ -1,24 +1,29 @@
-﻿@using Blazor.Core.Models.VMs
+﻿@using Blazor.Core.Models.Entities
+@using Blazor.Core.Models.Settings
 
-<h3>TransactionPage</h3>
+<h3>TransactionRecord</h3>
 
-<table>
-    <tr>
-        <thead>
-            <td>Id</td>
-            <td>name</td>
-        </thead>
-    </tr>
-
-    @foreach(var item in DataSource.DataSet) {
+@if(DataSet != null && DataSet.Any() ) { 
+    <table>
         <tr>
-            <td>@item.Id</td>
-            <td>@item.Name</td>
+            <thead>
+                <td>Id</td>
+                <td>name</td>
+            </thead>
         </tr>
-    }        
 
-</table>
+        @foreach(var item in DataSet) {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+            </tr>
+        }        
+
+    </table>
+} else  {
+    <p>No DataSet is Available</p>
+}
 
 @code {
-    [Parameter] public TransactionVM DataSource {get; set;}
+    [Parameter] public List<CRUDTransactionDTO> DataSet {get; set;}
 }

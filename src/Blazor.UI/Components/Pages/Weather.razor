@@ -1,7 +1,7 @@
 ﻿@page "/Weather"
 @using Blazor.Core.Helpers
 @using Blazor.Core.Models.Entities
-@using Blazor.Core.Models.VMs
+@using Blazor.Core.Models.Settings
 @using Blazor.UI.Components.PageComponents
 @using Blazor.UI.Helpers
 @using Blazor.UI.Services
@@ -25,15 +25,15 @@ else
     <button class="btn btn-primary btn-space" @onclick="LoadData"><i class="bi bi-arrow-right"></i> Load More</button>
     <button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ResetData() )"><i class="bi bi-arrow-clockwise"></i> Reset</button>
 
-    <WeatherSummaryGrid DataSource="@DataSource" />
+    <WeatherSummaryGrid Settings="@DataSource" />
     
-    <WeatherGrid DataSource="@DataSource" />
+    <WeatherGrid DataSource="@DataSource.WeatherList" />
 }
 
 @code {
     [Inject] WeatherServices _services { get; set; } = default!;
 
-    private WeatherPageVM DataSource { get; set; } = new();
+    private WeatherSettings DataSource { get; set; } = new();
     
     protected override async Task OnInitializedAsync()
     {
@@ -50,3 +50,10 @@ else
     }
 
 }
+    using Blazor.Core.Models.Settings;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "/home/preet/Projects/Projects-W/Web-Projects/Web-Projects-002/BlazorUI/src/Blazor.UI/Components/Pages/Weather.razor"

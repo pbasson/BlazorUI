@@ -1,0 +1,21 @@
+﻿@using Blazor.Core.Models.Entities
+@using Blazor.Core.Models.Settings
+
+<h3>TransactionRecord</h3>
+
+<table>
+    <thead>
+        <td>Id</td>
+        <td>name</td>
+    </thead>
+
+    <tr>
+        <td>@DataSet.Id</td>
+        <td>@DataSet.Name</td>
+    </tr>
+
+</table>
+
+@code {
+    [Parameter] public CRUDTransactionDTO DataSet {get; set;}
+}

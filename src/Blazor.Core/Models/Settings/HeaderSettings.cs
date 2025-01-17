@@ -1,6 +1,6 @@
-namespace Blazor.Core.Models.VMs;
+namespace Blazor.Core.Models.Settings;
 
-public class HeaderVM
+public class HeaderSettings
 {
     public bool Loading = true;
     // public List<object> DataSource { get; set; } = default!;

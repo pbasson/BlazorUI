@@ -26,5 +26,16 @@ namespace Blazor.UI.Helpers
             }
         }
 
+            public async Task<HttpResponseMessage> GetRecordByIdAsync( string navigate, int id ) {
+            try {
+                var test = string.Format(navigate, id); 
+                var getRecord = await _client.GetAsync(test);
+                return getRecord;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
