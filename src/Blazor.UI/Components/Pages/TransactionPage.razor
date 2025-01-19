@@ -29,11 +29,17 @@ else
     [Inject] TransactionService _services { get; set; } = default!;
 
     private TransactionSettings DataSource { get; set; } = new();
+    private int randomInt = 0;
     
     protected override async Task OnInitializedAsync() {
         DataSource.DataSet = await _services.GetAllRecordsAsync();
-        DataSource.DataRecord = await _services.GetRecordByIdAsync(1);
-        await _services.CreateRecordAsync( new CRUDTransactionDTO { Name = "Tony Random" });
+
+        do {
+            randomInt = Random.Shared.Next(1, DataSource.DataSet.Count());
+        } while (!DataSource.DataSet.Select(x => x.Id).Contains(randomInt) );  
+         
+        DataSource.DataRecord = await _services.GetRecordByIdAsync(randomInt);
+        @* await _services.CreateRecordAsync( new CRUDTransactionDTO { Name = "Tony Random" }); *@
 
         if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
         {

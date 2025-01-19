@@ -45,7 +45,7 @@ public class TransactionService : ITransactionService
 
     public async Task<bool> CreateRecordAsync(CRUDTransactionDTO dto)
     {
-        var response = await new HttpClientSettings().PostHttpAsync(TransactionNavigation.CreateRecord, dto);
+        var response = await new HttpClientSettings().PostAsync(TransactionNavigation.CreateRecord, dto);
 
         if (response.IsSuccessStatusCode )
         {

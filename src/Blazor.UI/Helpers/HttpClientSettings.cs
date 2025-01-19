@@ -1,10 +1,11 @@
 using System.Text;
 using Blazor.Core.Helpers;
 using Newtonsoft.Json;
+using Blazor.Core.Interfaces.InterfaceConfigs;
 
 namespace Blazor.UI.Helpers
 {
-    public class HttpClientSettings
+    public class HttpClientSettings : IHttpClientSettings
     {
         public HttpClient _client = default!; 
 
@@ -40,7 +41,7 @@ namespace Blazor.UI.Helpers
             }
         }
  
-        public async Task<HttpResponseMessage> PostHttpAsync(string navigate, object ob) {
+        public async Task<HttpResponseMessage> PostAsync(string navigate, object ob) {
             try
             {
                 var result = await _client.PostAsync( navigate, GetStringContent(ob) );
@@ -50,6 +51,16 @@ namespace Blazor.UI.Helpers
             {
                 throw;
             }
+        }
+
+        public Task<HttpResponseMessage> PutAsync(string navigate, object ob)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<HttpResponseMessage> DeleteByIdAsync(string navigate, int id)
+        {
+            throw new NotImplementedException();
         }
 
         private StringContent GetStringContent(object ob)
