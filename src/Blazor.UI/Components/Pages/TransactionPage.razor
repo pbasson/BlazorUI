@@ -30,16 +30,35 @@ else
 
     private TransactionSettings DataSource { get; set; } = new();
     private int randomInt = 0;
+    private bool CheckIdInList(int id) 
+    {
+        return !DataSource.DataSet.Select(x => x.Id).Contains(id) ;
+    }
+    @* Func<int,bool> CheckIdInList = x => !DataSource.DataSet.Select(x => x.Id).Contains(x) ; *@
     
-    protected override async Task OnInitializedAsync() {
-        DataSource.DataSet = await _services.GetAllRecordsAsync();
+    private int GetRandomId() {
+        return Random.Shared.Next(1, DataSource.DataSet.Count()); 
+    }
+    private int GetRandomValue(int num) {
+        return Random.Shared.Next(num); 
+    }
 
+
+    private void SetRandomId() {
         do {
-            randomInt = Random.Shared.Next(1, DataSource.DataSet.Count());
-        } while (!DataSource.DataSet.Select(x => x.Id).Contains(randomInt) );  
+            randomInt = GetRandomId();
+        } while (CheckIdInList(randomInt) );  
+    }
+
+    protected override async Task OnInitializedAsync() {
+
+        DataSource.DataSet = await _services.GetAllRecordsAsync();
          
+        SetRandomId();
         DataSource.DataRecord = await _services.GetRecordByIdAsync(randomInt);
-        @* await _services.CreateRecordAsync( new CRUDTransactionDTO { Name = "Tony Random" }); *@
+        @* await _services.CreateRecordAsync( new CRUDTransactionDTO { Name = $"Tony Random{GetRandomValue(100)}" }); *@
+        SetRandomId();
+        var test = await _services.UpdateRecordAsync( new CRUDTransactionDTO { Id = randomInt, Name = $"John{GetRandomValue(100)} Adam{GetRandomValue(100)}"});
 
         if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
         {
@@ -47,5 +66,7 @@ else
         }
 
     }
-}
 
+
+}
+    

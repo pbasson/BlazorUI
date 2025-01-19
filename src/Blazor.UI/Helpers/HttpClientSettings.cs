@@ -53,14 +53,31 @@ namespace Blazor.UI.Helpers
             }
         }
 
-        public Task<HttpResponseMessage> PutAsync(string navigate, object ob)
+        public async Task<HttpResponseMessage> PutAsync(string navigate, object ob)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _client.PutAsync( navigate, GetStringContent(ob) );
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public Task<HttpResponseMessage> DeleteByIdAsync(string navigate, int id)
+        public async Task<HttpResponseMessage> DeleteByIdAsync(string navigate, int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var navigation = string.Format(navigate, id); 
+                var result = await _client.DeleteAsync( navigation );
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private StringContent GetStringContent(object ob)

@@ -57,18 +57,24 @@ public class TransactionService : ITransactionService
 
     public async Task<bool> UpdateRecordAsync(CRUDTransactionDTO dto)
     {
-
+        var response = await new HttpClientSettings().PutAsync(TransactionNavigation.UpdateRecord, dto);
+        if (response.IsSuccessStatusCode )
+        {
+            var context = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<bool>(context);
+        }
         return false;
-
-        throw new NotImplementedException();
     }
 
     public async Task<bool> DeleteRecordAsync(int id)
     {
-        
+        var response = await new HttpClientSettings().DeleteByIdAsync(TransactionNavigation.DeleteRecord, id);
+        if (response.IsSuccessStatusCode )
+        {
+            var context = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<bool>(context);
+        }
         return false;
-
-        throw new NotImplementedException();
     }
 
 }
