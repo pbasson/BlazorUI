@@ -20,4 +20,5 @@ public readonly struct API_Statics
 {
     public readonly static string ApiKey = "X-API-KEY";
     public readonly static string AppSettingsFile = "appsettings.json";
+    public readonly static string AppJson = "application/json";
 }

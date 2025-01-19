@@ -11,10 +11,10 @@ public class TransactionService : ITransactionService
     public async Task<List<CRUDTransactionDTO>> GetAllRecordsAsync() {
         try
         {
-            var getrecord = await new HttpClientSettings().GetAllAsync(TransactionNavigation.GetAllRecords);
-            if (getrecord.IsSuccessStatusCode )
+            var response = await new HttpClientSettings().GetAllAsync(TransactionNavigation.GetAllRecords);
+            if (response.IsSuccessStatusCode )
             {
-                var context = await getrecord.Content.ReadAsStringAsync();
+                var context = await response.Content.ReadAsStringAsync();
                 var getRecord = JsonConvert.DeserializeObject<List<CRUDTransactionDTO>>(context);
                 
                 if (getRecord != null && getRecord.Any())
@@ -23,7 +23,7 @@ public class TransactionService : ITransactionService
                 }
             }
 
-            return new();
+            return [];
         }
         catch (Exception)
         {
@@ -33,32 +33,41 @@ public class TransactionService : ITransactionService
 
     public async Task<CRUDTransactionDTO> GetRecordByIdAsync(int id)
     {
-        var getrecord = await new HttpClientSettings().GetRecordByIdAsync(TransactionNavigation.GetRecordById, id);
-        if (getrecord.IsSuccessStatusCode )
-        {
-            var context = await getrecord.Content.ReadAsStringAsync();
+        var response = await new HttpClientSettings().GetRecordByIdAsync(TransactionNavigation.GetRecordById, id);
+        if (response.IsSuccessStatusCode ) {
+            var context = await response.Content.ReadAsStringAsync();
             var getRecord = JsonConvert.DeserializeObject<CRUDTransactionDTO>(context);
             
-            if (getRecord != null )
-            {
-                return getRecord;
-            }
+            if (getRecord != null ) { return getRecord; }
         }
         return new();
     }
 
     public async Task<bool> CreateRecordAsync(CRUDTransactionDTO dto)
     {
-        throw new NotImplementedException();
+        var response = await new HttpClientSettings().PostHttpAsync(TransactionNavigation.CreateRecord, dto);
+
+        if (response.IsSuccessStatusCode )
+        {
+            var context = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<bool>(context);
+        }
+        return false;
     }
 
     public async Task<bool> UpdateRecordAsync(CRUDTransactionDTO dto)
     {
+
+        return false;
+
         throw new NotImplementedException();
     }
 
     public async Task<bool> DeleteRecordAsync(int id)
     {
+        
+        return false;
+
         throw new NotImplementedException();
     }
 

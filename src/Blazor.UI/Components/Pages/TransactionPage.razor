@@ -1,4 +1,5 @@
 ﻿@page "/Transaction"
+@using Blazor.Core.Models.Entities
 @using Blazor.Core.Models.Settings
 @using Blazor.UI.Components.PageComponents
 @using Blazor.UI.Components.TransactionComponents
@@ -32,6 +33,8 @@ else
     protected override async Task OnInitializedAsync() {
         DataSource.DataSet = await _services.GetAllRecordsAsync();
         DataSource.DataRecord = await _services.GetRecordByIdAsync(1);
+        await _services.CreateRecordAsync( new CRUDTransactionDTO { Name = "Tony Random" });
+
         if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
         {
             DataSource.UnsetLoading();
