@@ -1,7 +1,29 @@
 ﻿@using Blazor.Core.Models.Entities
 @using Blazor.Core.Models.Settings
+@using Radzen
+@using Radzen.Blazor
+@using System.Data
+@using System.ComponentModel.DataAnnotations
 
 @if(DataSet != null && DataSet.Any() ) { 
+    
+<RadzenDataGrid Data="@DataSet" TItem="CRUDTransactionDTO"
+                AllowFiltering="true" 
+                AllowColumnResize="true" 
+                AllowAlternatingRows="false" 
+                FilterMode="FilterMode.Advanced" 
+                AllowSorting="true" 
+                AllowPaging="true" PageSize="20" 
+                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                ColumnWidth="10" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="DataSet" Property="Id" Title="Id" Frozen="true"  />
+        <RadzenDataGridColumn TItem="DataSet" Property="Name" Title="Name" Frozen="true"  />
+
+    </Columns>
+</RadzenDataGrid>
+
+
     <table class="table">
         <tr>
             <thead>
@@ -24,4 +46,4 @@
 
 @code {
     [Parameter] public List<CRUDTransactionDTO> DataSet {get; set;}
-}
+}    

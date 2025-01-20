@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="ElmahCore" Version="2.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Radzen.Blazor" Version="5.7.9" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components/TransactionComponents/" />
