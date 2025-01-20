@@ -56,9 +56,12 @@ else
          
         SetRandomId();
         DataSource.DataRecord = await _services.GetRecordByIdAsync(randomInt);
-        @* await _services.CreateRecordAsync( new CRUDTransactionDTO { Name = $"Tony Random{GetRandomValue(100)}" }); *@
+        await _services.CreateRecordAsync( new CRUDTransactionDTO { Name = $"Tony{GetRandomValue(100)} Random{GetRandomValue(100)}" });
         SetRandomId();
         var test = await _services.UpdateRecordAsync( new CRUDTransactionDTO { Id = randomInt, Name = $"John{GetRandomValue(100)} Adam{GetRandomValue(100)}"});
+        SetRandomId();
+
+        @* var test1 = await _services.DeleteRecordAsync(randomInt); *@
 
         if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
         {

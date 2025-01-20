@@ -13,5 +13,5 @@ public readonly struct TransactionNavigation
     public readonly static string GetRecordById = $"{Module}/GetRecordById/{parameter}";
     public readonly static string CreateRecord = $"{Module}/CreateRecord/";
     public readonly static string UpdateRecord = $"{Module}/UpdateRecord/";
-    public readonly static string DeleteRecord = $"{Module}/DeleteRecord/{parameter}";
+    public readonly static string DeleteRecord = $"{Module}/DeleteRecord";
 }

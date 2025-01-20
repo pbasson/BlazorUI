@@ -70,7 +70,8 @@ namespace Blazor.UI.Helpers
         {
             try
             {
-                var navigation = string.Format(navigate, id); 
+                // var navigation = string.Format(navigate, id);
+                var navigation = $"{navigate}?id={id}";
                 var result = await _client.DeleteAsync( navigation );
                 return result;
             }
