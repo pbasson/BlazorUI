@@ -1,29 +1,39 @@
 ﻿@using Blazor.Core.Models.Entities
 @using Blazor.Core.Models.Settings
-@using Radzen
-@using Radzen.Blazor
 @using System.Data
 @using System.ComponentModel.DataAnnotations
 
 @if(DataSet != null && DataSet.Any() ) { 
     
-<RadzenDataGrid Data="@DataSet" TItem="CRUDTransactionDTO"
-                AllowFiltering="true" 
-                AllowColumnResize="true" 
-                AllowAlternatingRows="false" 
-                FilterMode="FilterMode.Advanced" 
-                AllowSorting="true" 
-                AllowPaging="true" PageSize="20" 
-                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                ColumnWidth="10" LogicalFilterOperator="LogicalFilterOperator.Or">
-    <Columns>
-        <RadzenDataGridColumn TItem="DataSet" Property="Id" Title="Id" Frozen="true"  />
-        <RadzenDataGridColumn TItem="DataSet" Property="Name" Title="Name" Frozen="true"  />
+    <RadzenDataGrid Data="@DataSet" TItem="CRUDTransactionDTO"
+            AllowColumnResize="true" 
+            AllowAlternatingRows="false" 
+            AllowSorting="true" 
+            FilterMode="FilterMode.Advanced" 
+            PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            AllowPaging="true" PageSize="20" 
+            ColumnWidth="200px" LogicalFilterOperator="LogicalFilterOperator.Or"
+            >
+            <HeaderTemplate>
+                <RadzenStack>
+                    <RadzenButton Text="Add"> <i class="bi bi-plus-circle">Add</i> </RadzenButton>
+                </RadzenStack>
+            </HeaderTemplate>
+        <Columns>
+            <RadzenDataGridColumn TItem="CRUDTransactionDTO" Property="Id" Title="Id" Frozen="true"  />
+            <RadzenDataGridColumn TItem="CRUDTransactionDTO" Property="Name" Title="Name" Frozen="true"  />
+            <RadzenDataGridColumn >
+                <Template>
+                    @{
+                        <RadzenButton> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
+                        <RadzenButton> <i class="bi bi-x-lg">Delete</i> </RadzenButton>
+                    }
+                </Template>
+            </RadzenDataGridColumn>
 
-    </Columns>
-</RadzenDataGrid>
-
-
+        </Columns>
+    </RadzenDataGrid>
+@* 
     <table class="table">
         <tr>
             <thead>
@@ -39,11 +49,11 @@
             </tr>
         }        
 
-    </table>
+    </table> *@
 } else  {
     <p>No DataSet is Available</p>
 }
 
 @code {
-    [Parameter] public List<CRUDTransactionDTO> DataSet {get; set;}
+    [Parameter] public List<CRUDTransactionDTO>? DataSet {get; set;}
 }    

@@ -1,5 +1,6 @@
 using Blazor.UI.Components;
 using Blazor.UI.Services;
+using Radzen;
 
 namespace Blazor.UI.Helpers
 {
@@ -13,6 +14,8 @@ namespace Blazor.UI.Helpers
             RegisterCoreServices(services);
             
             services.AddHttpClient();
+            services.AddRadzenComponents();
+
             return services;
         }
 
@@ -32,10 +35,11 @@ namespace Blazor.UI.Helpers
             //     app.UseHsts();
             // }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAntiforgery();
             app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+
             // app.UseElmah();
 
         }

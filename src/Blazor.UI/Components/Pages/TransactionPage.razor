@@ -18,7 +18,7 @@
 else
 {
     
-    <TransactionGrid DataSet="@DataSource.DataSet" />
+    <TransactionGrid DataSet="@DataSource.DataSet"/>
     <br />
 
     @* <TransactionRecord DataSet="@DataSource.DataRecord" /> *@
@@ -34,8 +34,7 @@ else
     {
         return !DataSource.DataSet.Select(x => x.Id).Contains(id) ;
     }
-    @* Func<int,bool> CheckIdInList = x => !DataSource.DataSet.Select(x => x.Id).Contains(x) ; *@
-    
+
     private int GetRandomId() {
         return Random.Shared.Next(1, DataSource.DataSet.Count()); 
     }
