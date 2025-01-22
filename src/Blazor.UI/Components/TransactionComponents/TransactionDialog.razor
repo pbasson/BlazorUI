@@ -6,7 +6,7 @@
     <RadzenRow Gap="2rem" RowGap="2rem" class="rz-m-0 rz-m-md-12">
         <RadzenColumn Size="12">
             <RadzenCard>
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">TextArea</RadzenText>
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3" Text="@Title"></RadzenText>
                 <RadzenTextArea Value="@Data.Name" Change=@(args => OnChange(args, "TextArea")) Style="width: 100%" aria-label="TextArea" />
             </RadzenCard>
         </RadzenColumn>
@@ -23,27 +23,25 @@
     [Parameter] public CRUDTransactionDTO Data {get; set;} = default!;
     [Inject] TransactionService service {get; set;} = default!;
 
-
+    string Title {get => (Data.Id == 0) ? "Add" : "Edit"; }
+    
     void OnChange(string value, string name)
     {
-        if(Data != null && !string.IsNullOrEmpty(Data.Name))
+        if(Data != null && !string.IsNullOrEmpty(value))
         {
             Data.Name = value; 
-            Console.WriteLine($"{name} value changed to {value}");
         }
 
     }
 
     async Task SubmitForm() {
-        if(Data != null && Data.Id > 0) {
+        if(Data != null && Data.Id > 0 && !string.IsNullOrEmpty(Data.Name) ) {
             await service.UpdateRecordAsync(Data);
         }
-        else if (Data != null && Data.Id == 0){
+        else if (Data != null && Data.Id == 0 && !string.IsNullOrEmpty(Data.Name)){
             await service.CreateRecordAsync(Data);
         }
 
-        await service.GetAllRecordsAsync();
-        
         dialogService.Close(true);
     }
 }      

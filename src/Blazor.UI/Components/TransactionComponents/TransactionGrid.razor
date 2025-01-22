@@ -51,20 +51,15 @@
     [Inject] TransactionService service {get; set;} = default!;
 
     private async Task AddRecord(MouseEventArgs args) {
-        Console.WriteLine($"AddRecord: {System.DateTime.Now}");        
-        await service.CreateRecordAsync( new CRUDTransactionDTO{ Name = $"Tony Test{System.DateTime.Now}"});
+        await DialogService.OpenAsync<TransactionDialog>( "Add", new Dictionary<string, object> { { "Data", new CRUDTransactionDTO() } }, SetOption() );   
+
         DataSet = await service.GetAllRecordsAsync();
     }
 
     private async Task EditRecord(MouseEventArgs args, CRUDTransactionDTO dTO) {
-        Console.WriteLine($"EditRecord: {System.DateTime.Now}");
-        DialogService.Open<TransactionDialog>( "Title", new Dictionary<string, object> { { "Data", dTO } },
-            new DialogOptions {
-                    Width = "700px", 
-                    Height = "512px",
-        });        
-        @* await service.UpdateRecordAsync( new CRUDTransactionDTO{ Id = id, Name = $"Tony Test{System.DateTime.Now}"}); *@
-        @* DataSet = await service.GetAllRecordsAsync(); *@
+        await DialogService.OpenAsync<TransactionDialog>( "Edit", new Dictionary<string, object> { { "Data", dTO } }, SetOption() );        
+
+        DataSet = await service.GetAllRecordsAsync();
     }
 
     private async Task ConfirmButton(MouseEventArgs args, int id) {
@@ -75,5 +70,12 @@
             await service.DeleteRecordAsync(id); 
             DataSet = await service.GetAllRecordsAsync();
         }
+    }
+
+    DialogOptions SetOption() {
+        return new DialogOptions {
+            Width = "700px", 
+            Height = "512px",
+        };
     }
 }    
