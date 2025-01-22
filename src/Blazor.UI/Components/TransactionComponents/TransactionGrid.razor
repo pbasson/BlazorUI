@@ -1,7 +1,12 @@
-﻿@using Blazor.Core.Models.Entities
+﻿@using Blazor.Core.Helpers
+@using Blazor.Core.Models.Entities
 @using Blazor.Core.Models.Settings
 @using System.Data
 @using System.ComponentModel.DataAnnotations
+@using Blazor.UI.Services
+@using Radzen.Blazor.Rendering
+@inject DialogService DialogService
+@rendermode InteractiveServer
 
 @if(DataSet != null && DataSet.Any() ) { 
     
@@ -16,7 +21,7 @@
             >
             <HeaderTemplate>
                 <RadzenStack>
-                    <RadzenButton Text="Add"> <i class="bi bi-plus-circle">Add</i> </RadzenButton>
+                    <RadzenButton  Text="Add" Click="AddRecord"> <i class="bi bi-plus-circle">Add</i> </RadzenButton>
                 </RadzenStack>
             </HeaderTemplate>
         <Columns>
@@ -25,35 +30,50 @@
             <RadzenDataGridColumn >
                 <Template>
                     @{
-                        <RadzenButton> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
-                        <RadzenButton> <i class="bi bi-x-lg">Delete</i> </RadzenButton>
+                        var dataContext = context.Id; 
+                        <RadzenButton Click="@( args => EditRecord( args, dataContext) )"> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
+                        <RadzenButton Text="Confirm dialog" ButtonStyle="ButtonStyle.Secondary" Click=@( args => ConfirmButton( args, dataContext) ) > 
+                            <i class="bi bi-x-lg">Delete</i> </RadzenButton>
+
                     }
                 </Template>
             </RadzenDataGridColumn>
 
         </Columns>
     </RadzenDataGrid>
-@* 
-    <table class="table">
-        <tr>
-            <thead>
-                <td>Id</td>
-                <td>name</td>
-            </thead>
-        </tr>
 
-        @foreach(var item in DataSet) {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-            </tr>
-        }        
-
-    </table> *@
 } else  {
     <p>No DataSet is Available</p>
 }
 
+
 @code {
     [Parameter] public List<CRUDTransactionDTO>? DataSet {get; set;}
+    [Inject] TransactionService service {get; set;}
+
+
+    private async Task AddRecord(MouseEventArgs args) {
+        Console.WriteLine($"AddRecord: {System.DateTime.Now}");        
+        await service.CreateRecordAsync( new CRUDTransactionDTO{ Name = $"Tony Test{System.DateTime.Now}"});
+        DataSet = await service.GetAllRecordsAsync();
+
+    }
+
+    private async Task EditRecord(MouseEventArgs args, int id) {
+        Console.WriteLine($"EditRecord: {System.DateTime.Now}");        
+        await service.UpdateRecordAsync( new CRUDTransactionDTO{ Id = id, Name = $"Tony Test{System.DateTime.Now}"});
+        DataSet = await service.GetAllRecordsAsync();
+    }
+
+    private async Task ConfirmButton(MouseEventArgs args, int id) {
+        Console.WriteLine($"ConfirmButton: {id} {System.DateTime.Now}");        
+        @* var test = await DialogService.Confirm($"{PageStatics.ConfirmDelete}", "MyTitle",  *@
+            @* new ConfirmOptions() { OkButtonText = $"{PageStatics.ConfirmYes}", CancelButtonText = $"{PageStatics.ConfirmCancel}" }); *@
+        @* if(test != null && test == true) {
+            Console.WriteLine($"ConfirmButton: {id} {System.DateTime.Now}");        
+        } *@
+
+        await service.DeleteRecordAsync(id); 
+        DataSet = await service.GetAllRecordsAsync();
+    }
 }    

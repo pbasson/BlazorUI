@@ -12,7 +12,6 @@ namespace Blazor.UI.Helpers
 
             services.AddRazorComponents().AddInteractiveServerComponents();
             RegisterCoreServices(services);
-            
             services.AddHttpClient();
             services.AddRadzenComponents();
 
@@ -21,6 +20,8 @@ namespace Blazor.UI.Helpers
 
         private static void RegisterCoreServices(IServiceCollection services)
         {
+            services.AddScoped<DialogService>();
+
             services.AddScoped<WeatherServices>();
             services.AddScoped<TransactionService>();
         }
