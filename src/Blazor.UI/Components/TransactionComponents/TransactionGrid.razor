@@ -7,6 +7,7 @@
 @using Radzen.Blazor.Rendering
 @inject DialogService DialogService
 @rendermode InteractiveServer
+<RadzenDialog/>
 
 @if(DataSet != null && DataSet.Any() ) { 
     
@@ -49,7 +50,7 @@
 
 @code {
     [Parameter] public List<CRUDTransactionDTO>? DataSet {get; set;}
-    [Inject] TransactionService service {get; set;}
+    [Inject] TransactionService service {get; set;} = default!;
 
 
     private async Task AddRecord(MouseEventArgs args) {
@@ -66,14 +67,12 @@
     }
 
     private async Task ConfirmButton(MouseEventArgs args, int id) {
-        Console.WriteLine($"ConfirmButton: {id} {System.DateTime.Now}");        
-        @* var test = await DialogService.Confirm($"{PageStatics.ConfirmDelete}", "MyTitle",  *@
-            @* new ConfirmOptions() { OkButtonText = $"{PageStatics.ConfirmYes}", CancelButtonText = $"{PageStatics.ConfirmCancel}" }); *@
-        @* if(test != null && test == true) {
-            Console.WriteLine($"ConfirmButton: {id} {System.DateTime.Now}");        
-        } *@
+        var getConfirm = await DialogService.Confirm($"{PageStatics.ConfirmDelete}", "MyTitle", 
+                            new ConfirmOptions() { OkButtonText = $"{PageStatics.ConfirmYes}", CancelButtonText = $"{PageStatics.ConfirmCancel}" });
 
-        await service.DeleteRecordAsync(id); 
-        DataSet = await service.GetAllRecordsAsync();
+        if(getConfirm != null && (bool)getConfirm) {
+            await service.DeleteRecordAsync(id); 
+            DataSet = await service.GetAllRecordsAsync();
+        }
     }
 }    
