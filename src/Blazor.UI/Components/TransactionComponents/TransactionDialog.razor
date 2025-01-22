@@ -1,7 +1,49 @@
-@using Radzen.Blazor.Rendering
+@using Blazor.Core.Models.Entities
+@using Blazor.UI.Services
+@inject Radzen.DialogService dialogService
 
+<RadzenStack>
+    <RadzenRow Gap="2rem" RowGap="2rem" class="rz-m-0 rz-m-md-12">
+        <RadzenColumn Size="12">
+            <RadzenCard>
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">TextArea</RadzenText>
+                <RadzenTextArea Value="@Data.Name" Change=@(args => OnChange(args, "TextArea")) Style="width: 100%" aria-label="TextArea" />
+            </RadzenCard>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+        <RadzenButton Click="@SubmitForm" Text="Submit"/>
+        <RadzenButton Click="@((args) => dialogService.Close(true))" Text="Close" />
+    </RadzenRow>
 
+</RadzenStack>
 
 
 @code {
-}   
+    [Parameter] public CRUDTransactionDTO Data {get; set;} = default!;
+    [Inject] TransactionService service {get; set;} = default!;
+
+
+    void OnChange(string value, string name)
+    {
+        if(Data != null && !string.IsNullOrEmpty(Data.Name))
+        {
+            Data.Name = value; 
+            Console.WriteLine($"{name} value changed to {value}");
+        }
+
+    }
+
+    async Task SubmitForm() {
+        if(Data != null && Data.Id > 0) {
+            await service.UpdateRecordAsync(Data);
+        }
+        else if (Data != null && Data.Id == 0){
+            await service.CreateRecordAsync(Data);
+        }
+
+        await service.GetAllRecordsAsync();
+        
+        dialogService.Close(true);
+    }
+}      

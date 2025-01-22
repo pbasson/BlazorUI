@@ -26,13 +26,13 @@
                 </RadzenStack>
             </HeaderTemplate>
         <Columns>
-            <RadzenDataGridColumn TItem="CRUDTransactionDTO" Property="Id" Title="Id" Frozen="true"  />
-            <RadzenDataGridColumn TItem="CRUDTransactionDTO" Property="Name" Title="Name" Frozen="true"  />
-            <RadzenDataGridColumn >
+            <RadzenDataGridColumn TItem="CRUDTransactionDTO" Property="Id" Title="Id" Width="50px" />
+            <RadzenDataGridColumn TItem="CRUDTransactionDTO" Property="Name" Title="Name"   />
+            <RadzenDataGridColumn Frozen="true" Width="180px">
                 <Template>
                     @{
                         var dataContext = context.Id; 
-                        <RadzenButton Click="@( args => EditRecord( args, dataContext) )"> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
+                        <RadzenButton Click="@( args => EditRecord( args, context) )"> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
                         <RadzenButton Text="Confirm dialog" ButtonStyle="ButtonStyle.Secondary" Click=@( args => ConfirmButton( args, dataContext) ) > 
                             <i class="bi bi-x-lg">Delete</i> </RadzenButton>
                     }
@@ -56,10 +56,15 @@
         DataSet = await service.GetAllRecordsAsync();
     }
 
-    private async Task EditRecord(MouseEventArgs args, int id) {
-        Console.WriteLine($"EditRecord: {System.DateTime.Now}");        
-        await service.UpdateRecordAsync( new CRUDTransactionDTO{ Id = id, Name = $"Tony Test{System.DateTime.Now}"});
-        DataSet = await service.GetAllRecordsAsync();
+    private async Task EditRecord(MouseEventArgs args, CRUDTransactionDTO dTO) {
+        Console.WriteLine($"EditRecord: {System.DateTime.Now}");
+        DialogService.Open<TransactionDialog>( "Title", new Dictionary<string, object> { { "Data", dTO } },
+            new DialogOptions {
+                    Width = "700px", 
+                    Height = "512px",
+        });        
+        @* await service.UpdateRecordAsync( new CRUDTransactionDTO{ Id = id, Name = $"Tony Test{System.DateTime.Now}"}); *@
+        @* DataSet = await service.GetAllRecordsAsync(); *@
     }
 
     private async Task ConfirmButton(MouseEventArgs args, int id) {
