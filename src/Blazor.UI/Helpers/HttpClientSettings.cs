@@ -8,10 +8,9 @@ namespace Blazor.UI.Helpers
     public class HttpClientSettings : IHttpClientSettings
     {
         public HttpClient _client = default!; 
-
         public HttpClientSettings( )
         {
-            var ApiURL =  ConfigHandler.AppSetting["CoreApi:URL"] ?? string.Empty;
+            var ApiURL =  $"http://{ConfigHandler.AppSetting["CoreApi:URL"] ?? "localhost"}/api/";
             var ApiKEY = ConfigHandler.AppSetting["CoreApi:KEY"] ?? string.Empty;
             _client = new HttpClient();
             _client.BaseAddress = new Uri( ApiURL );
@@ -70,7 +69,6 @@ namespace Blazor.UI.Helpers
         {
             try
             {
-                // var navigation = string.Format(navigate, id);
                 var navigation = $"{navigate}?id={id}";
                 var result = await _client.DeleteAsync( navigation );
                 return result;
