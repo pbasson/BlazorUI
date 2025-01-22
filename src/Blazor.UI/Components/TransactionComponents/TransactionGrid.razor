@@ -7,18 +7,18 @@
 @using Radzen.Blazor.Rendering
 @inject DialogService DialogService
 @rendermode InteractiveServer
-<RadzenDialog/>
+<RadzenComponents  />
+<RadzenDialog />
 
 @if(DataSet != null && DataSet.Any() ) { 
     
     <RadzenDataGrid Data="@DataSet" TItem="CRUDTransactionDTO"
             AllowColumnResize="true" 
             AllowAlternatingRows="false" 
-            AllowSorting="true" 
-            FilterMode="FilterMode.Advanced" 
+            AllowSorting="true" Count="@DataSet.Count()"
             PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-            AllowPaging="true" PageSize="20" 
-            ColumnWidth="200px" LogicalFilterOperator="LogicalFilterOperator.Or"
+            AllowPaging="true" PageSize="5" 
+            ColumnWidth="200px" 
             >
             <HeaderTemplate>
                 <RadzenStack>
@@ -35,7 +35,6 @@
                         <RadzenButton Click="@( args => EditRecord( args, dataContext) )"> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
                         <RadzenButton Text="Confirm dialog" ButtonStyle="ButtonStyle.Secondary" Click=@( args => ConfirmButton( args, dataContext) ) > 
                             <i class="bi bi-x-lg">Delete</i> </RadzenButton>
-
                     }
                 </Template>
             </RadzenDataGridColumn>
@@ -47,17 +46,14 @@
     <p>No DataSet is Available</p>
 }
 
-
 @code {
     [Parameter] public List<CRUDTransactionDTO>? DataSet {get; set;}
     [Inject] TransactionService service {get; set;} = default!;
-
 
     private async Task AddRecord(MouseEventArgs args) {
         Console.WriteLine($"AddRecord: {System.DateTime.Now}");        
         await service.CreateRecordAsync( new CRUDTransactionDTO{ Name = $"Tony Test{System.DateTime.Now}"});
         DataSet = await service.GetAllRecordsAsync();
-
     }
 
     private async Task EditRecord(MouseEventArgs args, int id) {
