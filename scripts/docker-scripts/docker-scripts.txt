@@ -1,0 +1,5 @@
+docker build -t preetbasson/blazorcore-ui:latest -f ./src/Blazor.UI/Dockerfile .
+
+docker push preetbasson/blazorcore-ui:latest
+
+docker build -t preetbasson/blazorcore-ui:latest -f ./src/Blazor.UI/Dockerfile . && docker push preetbasson/blazorcore-ui:latest
