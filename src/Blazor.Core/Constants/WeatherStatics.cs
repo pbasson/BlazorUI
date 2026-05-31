@@ -1,5 +1,3 @@
-using Blazor.Core.Models.Entities;
-
 namespace Blazor.Core.Constants;
 
 public static class WeatherStatics 

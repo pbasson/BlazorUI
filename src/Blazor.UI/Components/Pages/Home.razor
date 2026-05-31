@@ -1,8 +1,7 @@
 ﻿@page "/"
 @page "/home"
-@using Blazor.Core.Helpers
 @using Blazor.UI.Components.PageComponents
-@using Blazor.UI.Helpers
+@using Microsoft.AspNetCore.Components.Web
 @rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
@@ -12,7 +11,7 @@
 
 <NavigateToPage Path=@PathVariables.Weather />
 <NavigateToPage Path=@PathVariables.Counter />
-<NavigateToPage Path=@PathVariables.Transaction />
+<NavigateToPage Path=@PathVariables.User />
 
 @code
 {

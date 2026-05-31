@@ -1,0 +1,29 @@
+﻿@using Blazor.Core.Models.Entities
+
+<h3>UserDetails</h3>
+
+<table class="table">
+    <thead>
+        <td>Id</td>
+        <td>UserName</td>
+        <td>Full Name</td>
+        <td>DateOfBirth</td>
+        <td>Email</td>
+        <td>IsActive</td>
+    </thead>
+
+    <tr>
+        <td>@DataSet!.Id</td>
+        <td>@DataSet!.UserName</td>
+        <td>@DataSet!.FullName</td>
+        <td>@DataSet!.DateOfBirth</td>
+        <td>@DataSet!.Email</td>
+        <td>@DataSet!.ActiveStatus</td>
+    </tr>
+
+</table>
+
+@code {
+    [Parameter] 
+    public UserDTO? DataSet {get; set;}
+}

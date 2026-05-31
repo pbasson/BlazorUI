@@ -1,4 +1,4 @@
-namespace Blazor.Core.Helpers;
+namespace Blazor.Core.Constants;
 
 public static class PageStatics
 {
@@ -16,7 +16,7 @@ public readonly struct PathVariables
     public readonly static string Home = "/";
     public readonly static string Weather = "Weather";
     public readonly static string Counter = "Counter";
-    public readonly static string Transaction = "Transaction";
+    public readonly static string User = "User";
 }
 
 public readonly struct API_Statics

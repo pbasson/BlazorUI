@@ -11,9 +11,6 @@
     <PackageReference Include="Radzen.Blazor" Version="5.7.9" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components/TransactionComponents/" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="../Blazor.Core/Blazor.Core.csproj" />
   </ItemGroup>
 

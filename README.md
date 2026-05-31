@@ -5,6 +5,8 @@
 
 Blazor Framework demonstration implementing components with clean, scalable code.
 
+navigation, weather page random data generator, docker with compose, kubernetes setup, onion architecture 
+
 -----------
 ## Features
 
@@ -21,6 +23,8 @@ Blazor Framework demonstration implementing components with clean, scalable code
 | ASP.NET | 8.0 |
 | Blazor Serverside | - |
 | Radzen | - |
+| Docker | - |
+| Kubernetes | - |
 
 -----------
 ## Usage

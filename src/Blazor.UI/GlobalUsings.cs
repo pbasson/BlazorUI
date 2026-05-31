@@ -1,0 +1,13 @@
+global using System.Text;
+global using Blazor.Core.Constants;
+global using Blazor.Core.Enums;
+global using Blazor.Core.Interfaces.Configs;
+global using Blazor.Core.Interfaces.Services;
+global using Blazor.Core.Models.Entities;
+global using Blazor.Core.Models.Settings;
+global using Blazor.UI.Components;
+global using Blazor.UI.Helpers;
+global using Blazor.UI.Services;
+global using Microsoft.AspNetCore.Components;
+global using Newtonsoft.Json;
+global using Radzen;

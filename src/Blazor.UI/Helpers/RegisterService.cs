@@ -1,7 +1,3 @@
-using Blazor.UI.Components;
-using Blazor.UI.Services;
-using Radzen;
-
 namespace Blazor.UI.Helpers
 {
     public static class RegisterServices
@@ -23,7 +19,7 @@ namespace Blazor.UI.Helpers
             services.AddScoped<DialogService>();
 
             services.AddScoped<WeatherServices>();
-            services.AddScoped<TransactionService>();
+            services.AddScoped<UserService>();
         }
 
         public static void RegisterApplication(this WebApplication app)
