@@ -24,5 +24,15 @@ public class UserTransferGridDTO : BaseTransfer
         this.ActionStatusType = ActionStatusType;
         this.Records = Records;
     }
+}
 
+public class UserTransferDTO : BaseTransfer
+{
+    public UserDTO? Record { get; set; }
+
+    public UserTransferDTO( ActionStatusType ActionStatusType, UserDTO? Record) 
+    {
+        this.ActionStatusType = ActionStatusType;
+        this.Record = Record;
+    }
 }

@@ -4,7 +4,7 @@ public interface IUserService
 {
     Task<UserTransferGridDTO> GetAllAsync();
     Task<UserDTO> GetByIdAsync(int id);
-    Task<bool> CreateAsync(UserDTO dto);
-    Task<bool> UpdateAsync(UserDTO dto);
+    Task<TransferDTO> CreateAsync(UserDTO dto);
+    Task<TransferDTO> UpdateAsync(UserDTO dto);
     Task<bool> DeleteAsync(int id);
 }

@@ -1,3 +1,4 @@
+@using Radzen.Blazor
 @inject Radzen.DialogService dialogService
 
 <RadzenStack>
@@ -5,7 +6,23 @@
         <RadzenColumn Size="12">
             <RadzenCard>
                 <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3" Text="@Title"></RadzenText>
-                <RadzenTextArea Value="@Data.UserName" Change=@(args => OnChange(args, "TextArea")) Style="width: 100%" aria-label="TextArea" />
+                <RadzenStack Gap="1rem">
+                    <RadzenFormField Text="Username" Style="width: 100%">
+                        <RadzenTextBox @bind-Value="@Data.UserName" Name="Username" Placeholder="Enter Username" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Firstname" Style="width: 100%">
+                        <RadzenTextBox @bind-Value="@Data.FirstName" Name="Firstname" Placeholder="Enter Firstname" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Lastname" Style="width: 100%">
+                        <RadzenTextBox @bind-Value="@Data.LastName" Name="Lastname" Placeholder="Enter Lastname" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Date Of Birth" Style="width: 100%">
+                        <RadzenDatePicker @bind-Value="@DateOfBirthValue" Name="DateOfBirth" Placeholder="Select Date" />
+                    </RadzenFormField>
+                    <RadzenFormField Text="Email" Style="width: 100%">
+                        <RadzenTextBox @bind-Value="@Data.Email" Name="Email" Placeholder="Enter Email" />
+                    </RadzenFormField>
+                </RadzenStack>
             </RadzenCard>
         </RadzenColumn>
     </RadzenRow>
@@ -25,21 +42,21 @@
 
     string Title {get => (Data.Id == 0) ? "Add" : "Edit"; }
 
-    void OnChange(string value, string name)
+    DateTime? DateOfBirthValue
     {
-        if(Data != null && !string.IsNullOrEmpty(value))
+        get => Data.DateOfBirth?.ToDateTime(TimeOnly.MinValue);
+        set
         {
-            Data.UserName = value; 
+            Data.DateOfBirth = value.HasValue ? DateOnly.FromDateTime(value.Value) : null;
         }
-
     }
 
     async Task SubmitForm() {
         if(Data != null && Data.Id > 0 && !string.IsNullOrEmpty(Data.UserName) ) {
-            await service.UpdateAsync(Data);
+            var result = await service.UpdateAsync(Data);
         }
         else if (Data != null && Data.Id == 0 && !string.IsNullOrEmpty(Data.UserName)){
-            await service.CreateAsync(Data);
+            var result = await service.CreateAsync(Data);
         }
 
         dialogService.Close(true);
