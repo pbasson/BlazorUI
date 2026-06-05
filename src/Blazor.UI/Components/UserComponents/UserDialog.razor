@@ -52,12 +52,14 @@
     }
 
     async Task SubmitForm() {
-        if(Data != null && Data.Id > 0 && !string.IsNullOrEmpty(Data.UserName) ) {
-            var result = await service.UpdateAsync(Data);
-        }
-        else if (Data != null && Data.Id == 0 && !string.IsNullOrEmpty(Data.UserName)){
-            var result = await service.CreateAsync(Data);
-        }
+        if(Data != null && !string.IsNullOrEmpty(Data.UserName)){ 
+            if( Data.Id > 0  ) {
+                var result = await service.UpdateAsync(Data);
+            }
+            else if (Data.Id <= 0){
+                var result = await service.CreateAsync(Data);
+            }
+        }  
 
         dialogService.Close(true);
     }

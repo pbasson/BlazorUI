@@ -5,8 +5,12 @@ public partial class UserPage
     [Inject] 
     UserService _services { get; set; } = default!;
 
+    [Inject]
+    ToastService ToastService { get; set; } = default!;
+
     private UserSettings DataSource { get; set; } = new();
     private int randomInt = 0;
+    private bool _hasUserData;
     private bool CheckIdInList(int id) 
     {
         return !DataSource.DataSet.Select(x => x.Id).Contains(id) ;
@@ -25,15 +29,27 @@ public partial class UserPage
         } while (CheckIdInList(randomInt) );  
     }
 
-    protected override async Task OnInitializedAsync() {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
 
+        ToastService.Notify(new(ToastType.Info, "Loading users..."));
+
+        StateHasChanged();
         var result = await _services.GetAllAsync();
         DataSource.DataSet = result.Records ?? [];
+        _hasUserData = DataSource.DataSet.Any();
 
-        if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
-        {
-            DataSource.UnsetLoading();
-        }
+        DataSource.UnsetLoading();
+
+        ToastService.Notify(new(
+            _hasUserData ? ToastType.Success : ToastType.Warning,
+            _hasUserData ? "Users loaded." : "No users found."));
+
+        StateHasChanged();
 
     }
 

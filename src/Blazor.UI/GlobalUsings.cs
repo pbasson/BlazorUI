@@ -5,6 +5,7 @@ global using Blazor.Core.Interfaces.Configs;
 global using Blazor.Core.Interfaces.Services;
 global using Blazor.Core.Models.Entities;
 global using Blazor.Core.Models.Settings;
+global using BlazorBootstrap;
 global using Blazor.UI.Components;
 global using Blazor.UI.Services;
 global using Blazor.UI.Utility;

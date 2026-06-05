@@ -10,6 +10,7 @@ namespace Blazor.UI.Utility
             RegisterCoreServices(services);
             services.AddHttpClient();
             services.AddRadzenComponents();
+            services.AddBlazorBootstrap();
 
             return services;
         }

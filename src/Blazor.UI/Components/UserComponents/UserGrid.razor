@@ -1,10 +1,11 @@
 ﻿@inject DialogService DialogService
+@inject ToastService toastService
 @rendermode InteractiveServer
 <RadzenComponents  />
 <RadzenDialog />
 
-@if(DataSet != null && DataSet.Any() ) { 
-    
+@if(DataSet != null && DataSet.Any() ) 
+{ 
     <RadzenDataGrid Data="@DataSet" TItem="UserDTO"
             AllowColumnResize="true" 
             AllowAlternatingRows="false" 
@@ -25,14 +26,11 @@
             <RadzenDataGridColumn TItem="UserDTO" Property="LastName" Title="LastName"   />
             <RadzenDataGridColumn TItem="UserDTO" Property="DateOfBirth" Title="DateOfBirth"   />
             <RadzenDataGridColumn TItem="UserDTO" Property="Email" Title="Email"   />
-            <RadzenDataGridColumn Frozen="true" Width="180px">
-                <Template>
-                    @{
-                        var dataContext = context.Id; 
-                        <RadzenButton Click="@( args => EditRecord( args, context) )"> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
-                        <RadzenButton Text="Confirm dialog" ButtonStyle="ButtonStyle.Secondary" Click=@( args => ConfirmButton( args, dataContext) ) > 
-                            <i class="bi bi-x-lg">Delete</i> </RadzenButton>
-                    }
+            <RadzenDataGridColumn TItem="UserDTO" Frozen="true" Width="180px">
+                <Template Context="user">
+                    <RadzenButton Click="@((args) => EditRecord(args, user))"> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
+                    <RadzenButton Text="Confirm dialog" ButtonStyle="ButtonStyle.Secondary" Click="@((args) => ConfirmButton(args, user.Id))"> 
+                        <i class="bi bi-x-lg">Delete</i> </RadzenButton>
                 </Template>
             </RadzenDataGridColumn>
 
@@ -48,16 +46,16 @@
     public List<UserDTO>? DataSet {get; set;}
     [Inject]
     UserService service {get; set;} = default!;
-
-    private async Task AddRecord(MouseEventArgs args) {
+    
+    private async Task AddRecord(MouseEventArgs args) 
+    {
         await DialogService.OpenAsync<UserDialog>( "Add", new Dictionary<string, object> { { "Data", new UserDTO() } }, SetOption() );   
-
         await UpdateGetAll();
     }
 
-    private async Task EditRecord(MouseEventArgs args, UserDTO dTO) {
+    private async Task EditRecord(MouseEventArgs args, UserDTO dTO) 
+    {
         await DialogService.OpenAsync<UserDialog>( "Edit", new Dictionary<string, object> { { "Data", dTO } }, SetOption() );        
-
         await UpdateGetAll();
     }
 
@@ -65,9 +63,17 @@
         var getConfirm = await DialogService.Confirm($"{PageStatics.ConfirmDelete}", "MyTitle", 
                             new ConfirmOptions() { OkButtonText = $"{PageStatics.ConfirmYes}", CancelButtonText = $"{PageStatics.ConfirmCancel}" });
 
-        if(getConfirm != null && (bool)getConfirm) {
-            await service.DeleteAsync(id); 
-            await UpdateGetAll();
+        if(getConfirm != null && (bool)getConfirm) 
+        {
+            var deleted = await service.DeleteAsync(id); 
+            if (deleted)
+            {
+                toastService.Notify(new(ToastType.Success, "User deleted successfully."));
+                await UpdateGetAll();
+                return;
+            }
+
+            toastService.Notify(new(ToastType.Warning, "User could not be deleted."));
         }
     }
 
