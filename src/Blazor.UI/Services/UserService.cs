@@ -26,12 +26,20 @@ public class UserService : IUserService
                 }
             }
 
+            _logger.LogWarning(
+                "Failed to fetch all user records. API returned status code {StatusCode}.",
+                response.StatusCode);
             return new(ActionStatusType.Failed);
         }
-        catch (Exception)
+        catch (JsonException ex)
         {
-            _logger.LogError("An error occurred while fetching all user records.");
-            throw;
+            _logger.LogError(ex, "Invalid JSON returned while fetching all user records.");
+            return new(ActionStatusType.Failed);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An unexpected error occurred while fetching all user records.");
+            return new(ActionStatusType.Failed);
         }
     }
 

@@ -6,7 +6,7 @@ public readonly struct TransactionStatics
 
 public readonly struct TransactionNavigation
 {
-    public readonly static string Module = "User";
+    public readonly static string Module = "user";
     public readonly static string parameter = "{0}";
 
     public readonly static string GetAllRecords = $"{Module}";

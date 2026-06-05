@@ -1,5 +1,3 @@
-using Blazor.UI.Helpers;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.RegisterService();
 
