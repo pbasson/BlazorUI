@@ -1,0 +1,12 @@
+<div class="top-bar">
+    @if(!string.IsNullOrEmpty(Title))
+    {
+        <h2 class="top-bar-title">@Title</h2>
+    }
+    <a href="" target="_blank">About</a>
+</div>
+
+@code {
+    [Parameter]
+    public string Title {get; set;} = string.Empty;
+}

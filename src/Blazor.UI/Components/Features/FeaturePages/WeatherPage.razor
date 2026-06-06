@@ -22,7 +22,8 @@ else
 }
 
 @code {
-    [Inject] WeatherServices _services { get; set; } = default!;
+    [Inject] 
+    WeatherServices _services { get; set; } = default!;
 
     private WeatherSettings DataSource { get; set; } = new ();
     

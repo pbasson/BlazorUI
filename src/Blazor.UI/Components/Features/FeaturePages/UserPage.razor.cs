@@ -45,8 +45,7 @@ public partial class UserPage
 
         DataSource.Unload();
 
-        ToastService.Notify(new(
-            _hasUserData ? ToastType.Success : ToastType.Warning,
+        ToastService.Notify(new(_hasUserData ? ToastType.Success : ToastType.Warning, 
             _hasUserData ? "Users loaded." : "No users found."));
 
         StateHasChanged();
