@@ -3,7 +3,6 @@ namespace Blazor.Core.Models.Settings;
 public class HeaderSettings
 {
     public bool Loading = true;
-    // public List<object> DataSource { get; set; } = default!;
 
     public void SetLoading()
     {
@@ -14,17 +13,22 @@ public class HeaderSettings
     {
         Loading = false;
     } 
-
-    // public void ResetList()
-    // {
-    //     DataSource = new();
-    // }
-
-    // public void ResetData()
-    // {
-    //     SetLoading();
-    //     ResetList();
-    //     UnsetLoading();
-    // }
-
 }
+
+public class HeaderListSettings<T> : HeaderSettings where T : IEntity
+{
+    public List<T> DataSet { get; set; } = default!;
+
+    public void ResetList()
+    {
+        DataSet = [];
+    }
+
+    public void ResetData()
+    {
+        SetLoading();
+        ResetList();
+        UnsetLoading();
+    }
+}
+

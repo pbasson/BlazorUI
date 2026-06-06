@@ -19,7 +19,7 @@ else
 
     <WeatherSummaryGrid Settings="@DataSource" />
     
-    <WeatherGrid DataSource="@DataSource.WeatherList" />
+    <WeatherGrid DataSource="@DataSource.DataSet" />
 }
 
 @code {
@@ -34,8 +34,8 @@ else
 
     private async Task LoadData()
     {
-        DataSource.WeatherList = await _services.GetWeatherForecastAsync(DataSource.WeatherList);
-        if(DataSource != null && DataSource.WeatherList != null && DataSource.WeatherList.Any() )
+        DataSource.DataSet = await _services.GetWeatherForecastAsync(DataSource.DataSet);
+        if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
         {
             DataSource.UnsetLoading();
         }

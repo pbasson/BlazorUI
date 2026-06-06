@@ -1,6 +1,6 @@
 namespace Blazor.Core.Models.Entities;
 
-public class UserDTO 
+public class UserDTO : IEntity
 {
     public int Id { get; set; }
     public string? UserName { get; set; }
