@@ -2,7 +2,7 @@
 
 <PageTitle>@PageStatics.WeatherPage</PageTitle>
 
-<h1>@PageStatics.WeatherPage</h1>
+<h1>@DataSource.Title</h1>
 
 <p>@PageStatics.WeatherPageDetails</p>
 
@@ -15,17 +15,16 @@
 else
 {
     <button class="btn btn-primary btn-space" @onclick="LoadData"><i class="bi bi-arrow-right"></i> Load More</button>
-    <button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ResetData() )"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+    <button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ReloadData() )"><i class="bi bi-arrow-clockwise"></i> Reset</button>
 
     <WeatherSummaryGrid Settings="@DataSource" />
-    
     <WeatherGrid DataSource="@DataSource.DataSet" />
 }
 
 @code {
     [Inject] WeatherServices _services { get; set; } = default!;
 
-    private WeatherSettings DataSource { get; set; } = new();
+    private WeatherSettings DataSource { get; set; } = new ();
     
     protected override async Task OnInitializedAsync()
     {
@@ -37,7 +36,7 @@ else
         DataSource.DataSet = await _services.GetWeatherForecastAsync(DataSource.DataSet);
         if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
         {
-            DataSource.UnsetLoading();
+            DataSource.Unload();
         }
     }
 

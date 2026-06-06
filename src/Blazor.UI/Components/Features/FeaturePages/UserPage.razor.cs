@@ -43,7 +43,7 @@ public partial class UserPage
         DataSource.DataSet = result.Records ?? [];
         _hasUserData = DataSource.DataSet.Any();
 
-        DataSource.UnsetLoading();
+        DataSource.Unload();
 
         ToastService.Notify(new(
             _hasUserData ? ToastType.Success : ToastType.Warning,

@@ -2,6 +2,8 @@ namespace Blazor.Core.Models.Settings;
 
 public class WeatherSettings : HeaderListSettings<WeatherForecast>
 {
+    public override string Title { get; set; } = @PageStatics.WeatherPage;
+    
     public int MinWeather()
     {
         if (DataSet.Count > 0)
