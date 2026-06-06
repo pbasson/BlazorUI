@@ -56,6 +56,11 @@ main {
         height: 100vh;
         position: sticky;
         top: 0;
+        transition: width 0.2s ease;
+    }
+
+    .sidebar.collapsed {
+        width: 72px;
     }
 
     .top-row {
@@ -88,9 +93,9 @@ main {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}

@@ -45,12 +45,9 @@ public partial class UserPage
 
         DataSource.UnsetLoading();
 
-        if (result.ActionStatusType == ActionStatusType.Ok)
-        {
-            ToastService.Notify(new(
-                _hasUserData ? ToastType.Success : ToastType.Warning,
-                _hasUserData ? "Users loaded." : "No users found."));
-        }
+        ToastService.Notify(new(
+            _hasUserData ? ToastType.Success : ToastType.Warning,
+            _hasUserData ? "Users loaded." : "No users found."));
 
         StateHasChanged();
 
