@@ -1,13 +1,10 @@
 ﻿@page "/"
 @page "/home"
-@using Blazor.UI.Components.PageComponents
-@using Microsoft.AspNetCore.Components.Web
-@rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
 
-<h2>Welcome to Blazor UI</h2>
-<p>By Preetpal Basson (Developed & Designed)</p>
+<h2>@WelcomeMessage</h2>
+<p>@Author</p>
 
 <NavigateToPage Path=@PathVariables.Weather />
 <NavigateToPage Path=@PathVariables.Counter />
@@ -15,6 +12,9 @@
 
 @code
 {
+    private readonly string WelcomeMessage = "Welcome to Blazor UI";
+    private readonly string Author = "By Preetpal Basson (Developed & Designed)";
+
     protected async override Task OnInitializedAsync()
     {
         Console.WriteLine("Home Page Loaded");
