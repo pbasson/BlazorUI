@@ -21,7 +21,7 @@ public class HeaderSettings
 public class HeaderListSettings<T> : HeaderSettings where T : IEntity
 {
     public List<T> DataSet { get; set; } = default!;
-
+    public virtual int PageSize {get; set;} = 5;
     public void ResetData()
     {
         DataSet = [];

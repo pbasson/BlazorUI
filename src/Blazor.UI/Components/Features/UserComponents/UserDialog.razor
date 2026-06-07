@@ -1,65 +1,30 @@
 @inject Radzen.DialogService dialogService
 
-<RadzenStack>
-    <RadzenRow Gap="2rem" RowGap="2rem" class="rz-m-0 rz-m-md-12">
-        <RadzenColumn Size="12">
-            <RadzenCard>
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3" Text="@Title"></RadzenText>
-                <RadzenStack Gap="1rem">
-                    <RadzenFormField Text="Username" Style="width: 100%">
-                        <RadzenTextBox @bind-Value="@Data.UserName" Name="Username" Placeholder="Enter Username" />
-                    </RadzenFormField>
-                    <RadzenFormField Text="Firstname" Style="width: 100%">
-                        <RadzenTextBox @bind-Value="@Data.FirstName" Name="Firstname" Placeholder="Enter Firstname" />
-                    </RadzenFormField>
-                    <RadzenFormField Text="Lastname" Style="width: 100%">
-                        <RadzenTextBox @bind-Value="@Data.LastName" Name="Lastname" Placeholder="Enter Lastname" />
-                    </RadzenFormField>
-                    <RadzenFormField Text="Date Of Birth" Style="width: 100%">
-                        <RadzenDatePicker @bind-Value="@DateOfBirthValue" Name="DateOfBirth" Placeholder="Select Date" />
-                    </RadzenFormField>
-                    <RadzenFormField Text="Email" Style="width: 100%">
-                        <RadzenTextBox @bind-Value="@Data.Email" Name="Email" Placeholder="Enter Email" />
-                    </RadzenFormField>
-                </RadzenStack>
-            </RadzenCard>
-        </RadzenColumn>
-    </RadzenRow>
-    <RadzenRow>
-        <RadzenButton Click="@SubmitForm" Text="Submit"/>
-        <RadzenButton Click="@((args) => dialogService.Close(true))" Text="Close" />
-    </RadzenRow>
+<RadzenStack Gap="1.25rem" class="user-dialog-form">
+    <RadzenCard class="user-dialog-card">
+        <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3" Text="@Title" class="rz-mb-4" />
+        <RadzenStack Gap="1rem">
+            <RadzenFormField Text="Username">
+                <RadzenTextBox @bind-Value="@Data.UserName" Name="Username" Placeholder="Enter Username" class="input-form" />
+            </RadzenFormField>
+            <RadzenFormField Text="Firstname">
+                <RadzenTextBox @bind-Value="@Data.FirstName" Name="Firstname" Placeholder="Enter Firstname" class="input-form" />
+            </RadzenFormField>
+            <RadzenFormField Text="Lastname">
+                <RadzenTextBox @bind-Value="@Data.LastName" Name="Lastname" Placeholder="Enter Lastname" class="input-form"/>
+            </RadzenFormField>
+            <RadzenFormField Text="Date Of Birth">
+                <RadzenDatePicker @bind-Value="@DateOfBirthValue" Name="Date Of Birth" Placeholder="Select Date" class="input-form" />
+            </RadzenFormField>
+            <RadzenFormField Text="Email">
+                <RadzenTextBox @bind-Value="@Data.Email" Name="Email" Placeholder="Enter Email" class="input-form" />
+            </RadzenFormField>
+        </RadzenStack>
+    </RadzenCard>
 
+    <RadzenStack Orientation="Radzen.Orientation.Horizontal" Gap="0.75rem" JustifyContent="JustifyContent.End" class="user-dialog-actions">
+        <RadzenButton Click="@SubmitForm" Text="Submit" />
+        <RadzenButton Click="@((args) => dialogService.Close(true))" Text="Close" ButtonStyle="ButtonStyle.Secondary" />
+    </RadzenStack>
 </RadzenStack>
 
-
-@code {
-    [Parameter] 
-    public UserDTO Data {get; set;} = default!;
-    [Inject] 
-    UserService service {get; set;} = default!;
-
-    string Title {get => (Data.Id == 0) ? "Add" : "Edit"; }
-
-    DateTime? DateOfBirthValue
-    {
-        get => Data.DateOfBirth?.ToDateTime(TimeOnly.MinValue);
-        set
-        {
-            Data.DateOfBirth = value.HasValue ? DateOnly.FromDateTime(value.Value) : null;
-        }
-    }
-
-    async Task SubmitForm() {
-        if(Data != null && !string.IsNullOrEmpty(Data.UserName)){ 
-            if( Data.Id > 0  ) {
-                var result = await service.UpdateAsync(Data);
-            }
-            else if (Data.Id <= 0){
-                var result = await service.CreateAsync(Data);
-            }
-        }  
-
-        dialogService.Close(true);
-    }
-}      

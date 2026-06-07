@@ -1,0 +1,22 @@
+.user-dialog-form {
+    width: 100%;
+}
+
+.user-dialog-card {
+    box-shadow: none;
+    width: 100%;
+}
+
+.user-dialog-actions {
+    padding-right: 0.25rem;
+}
+
+@media (max-width: 640.98px) {
+    .user-dialog-actions {
+        flex-direction: column;
+    }
+}
+
+.input-form {
+    width: 100%;
+}
