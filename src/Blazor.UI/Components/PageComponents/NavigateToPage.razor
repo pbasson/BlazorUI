@@ -5,11 +5,9 @@
     NavigationManager _navManager { get; set; } = default!;
     [Parameter] [Required] 
     public string Path {get; set;}
-    
   
     void NavigateTo(string navigate)
     {
-        Console.WriteLine($"Navigate To {navigate}");
         _navManager.NavigateTo($"/{navigate}"); 
     }
 }

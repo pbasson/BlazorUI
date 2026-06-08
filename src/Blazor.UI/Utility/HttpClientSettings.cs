@@ -61,6 +61,20 @@ public class HttpClientSettings : IHttpClientSettings
         }
     }
 
+    public async Task<HttpResponseMessage> GetByNameAsync( string navigate, string username ) {
+        try 
+        {
+            var navigation = string.Format(navigate, username); 
+            var result = await _client.GetAsync(navigation);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError( ex,"Error GetByIdAsync");
+            throw;
+        }
+    }
+
     public async Task<HttpResponseMessage> PostAsync(string navigate, object ob) {
         try
         {

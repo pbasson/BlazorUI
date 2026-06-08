@@ -30,7 +30,7 @@ public class UserTransferDTO : BaseTransfer
 {
     public UserDTO? Record { get; set; }
 
-    public UserTransferDTO( ActionStatusType ActionStatusType, UserDTO? Record) 
+    public UserTransferDTO( ActionStatusType ActionStatusType, UserDTO? Record = null) 
     {
         this.ActionStatusType = ActionStatusType;
         this.Record = Record;

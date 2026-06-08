@@ -13,18 +13,23 @@ public partial class UserPage
     private bool _hasUserData;
     private bool CheckIdInList(int id) 
     {
-        return !DataSource.DataSet.Select(x => x.Id).Contains(id) ;
+        return DataSource!.DataSet.Select(x => x.Id).Contains(id) ;
     }
 
-    private int GetRandomId() {
+    private int GetRandomId() 
+    {
         return Random.Shared.Next(1, DataSource.DataSet.Count()); 
     }
-    private int GetRandomValue(int num) {
+
+    private int GetRandomValue(int num) 
+    {
         return Random.Shared.Next(num); 
     }
 
-    private void SetRandomId() {
-        do {
+    private void SetRandomId() 
+    {
+        do 
+        {
             randomInt = GetRandomId();
         } while (CheckIdInList(randomInt) );  
     }
@@ -37,8 +42,9 @@ public partial class UserPage
         }
 
         ToastService.Notify(new(ToastType.Info, "Loading users..."));
-
-        StateHasChanged();
+        DataSource.Load();
+        await Task.Delay(4000);
+        // StateHasChanged();
         var result = await _services.GetAllAsync();
         DataSource.DataSet = result.Records ?? [];
         _hasUserData = DataSource.DataSet.Any();

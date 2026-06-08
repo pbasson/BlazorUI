@@ -2,14 +2,22 @@ namespace Blazor.UI.Components.Features.UserComponents;
 
 public partial class UserDialog
 {
-     [Parameter] 
+    [Parameter] 
     public UserDTO Data {get; set;} = default!;
-    [Inject] 
+    [Inject]
     UserService service {get; set;} = default!;
     [Inject]
     ToastService toastService { get; set; } = default!;
-
+    private string _originalUsername = string.Empty;
+    private string _usernameValidationMessage = string.Empty;
+    private bool _usernameExists;
+    private bool _isCheckingUsername;
     string Title {get => (Data.Id == 0) ? "Add" : "Edit"; }
+
+    protected override void OnParametersSet()
+    {
+        _originalUsername = Data?.UserName ?? string.Empty;
+    }
 
     DateTime? DateOfBirthValue
     {
@@ -26,6 +34,13 @@ public partial class UserDialog
         { 
             var checkUpdate = Data.Id > 0;
             var updateMessage = checkUpdate ? "Updated" : "Created";
+
+            var usernameExists = await CheckUsername();
+            if(usernameExists)
+            {
+                toastService.Notify(new(ToastType.Warning, $"User: {Data.UserName} currently exists"));
+                return; 
+            }
             var result = (checkUpdate) ? await service.UpdateAsync(Data): await service.CreateAsync(Data);
             if(result != null && result.Success)
             {
@@ -37,5 +52,37 @@ public partial class UserDialog
         }  
 
         dialogService.Close(true);
+    }
+
+    private async Task<bool> CheckUsername()
+    {
+        _usernameValidationMessage = string.Empty;
+        _usernameExists = false;
+
+        if(Data == null || string.IsNullOrWhiteSpace(Data.UserName))
+        {
+            return false;
+        }
+
+        if (Data.Id > 0 && string.Equals(Data.UserName, _originalUsername, StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        _isCheckingUsername = true;
+        var result = await service.GetByNameAsync(Data.UserName);
+        _isCheckingUsername = false;
+
+        _usernameExists = result != null && result.Record != null && !string.IsNullOrEmpty(result?.Record?.UserName);
+        _usernameValidationMessage = _usernameExists
+            ? $"Username '{Data.UserName}' already exists."
+            : $"Username '{Data.UserName}' is available.";
+
+        return _usernameExists;
+    }
+
+    public async Task HandleUsername()
+    {
+        await CheckUsername();
     }
 }

@@ -1,12 +1,19 @@
 @inject Radzen.DialogService dialogService
+@inject ILogger<UserDialog> logger;
 
 <RadzenStack Gap="1.25rem" class="user-dialog-form">
     <RadzenCard class="user-dialog-card">
         <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3" Text="@Title" class="rz-mb-4" />
         <RadzenStack Gap="1rem">
             <RadzenFormField Text="Username">
-                <RadzenTextBox @bind-Value="@Data.UserName" Name="Username" Placeholder="Enter Username" class="input-form" />
+                <RadzenTextBox @bind-Value="@Data.UserName" Name="Username" Placeholder="Enter Username" class="input-form" Change="@HandleUsername" />
             </RadzenFormField>
+            @if (!string.IsNullOrEmpty(_usernameValidationMessage))
+            {
+                <RadzenText TextStyle="TextStyle.Caption"
+                            class="@(_usernameExists ? "username-validation-error" : "username-validation-ok")"
+                            Text="@_usernameValidationMessage" />
+            }
             <RadzenFormField Text="Firstname">
                 <RadzenTextBox @bind-Value="@Data.FirstName" Name="Firstname" Placeholder="Enter Firstname" class="input-form" />
             </RadzenFormField>
@@ -23,8 +30,7 @@
     </RadzenCard>
 
     <RadzenStack Orientation="Radzen.Orientation.Horizontal" Gap="0.75rem" JustifyContent="JustifyContent.End" class="user-dialog-actions">
-        <RadzenButton Click="@SubmitForm" Text="Submit" />
+        <RadzenButton Click="@SubmitForm" Text="@(_isCheckingUsername ? "Checking..." : "Submit")" Disabled="@(_isCheckingUsername || _usernameExists)" />
         <RadzenButton Click="@((args) => dialogService.Close(true))" Text="Close" ButtonStyle="ButtonStyle.Secondary" />
     </RadzenStack>
 </RadzenStack>
-

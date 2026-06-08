@@ -43,17 +43,31 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<UserDTO> GetByIdAsync(int id)
+    public async Task<UserTransferDTO> GetByIdAsync(int id)
     {
         var response = await new HttpClientSettings().GetByIdAsync(TransactionNavigation.GetRecordById, id);
         if (response.IsSuccessStatusCode ) {
             var context = await response.Content.ReadAsStringAsync();
-            var getRecord = JsonConvert.DeserializeObject<UserDTO>(context);
+            var getRecord = JsonConvert.DeserializeObject<UserTransferDTO>(context);
             
-            return getRecord != null ? getRecord : new(); 
+            return getRecord ?? new(ActionStatusType.Failed); 
         }
-        return new();
+        return new(ActionStatusType.Failed);
     }
+
+    public async Task<UserTransferDTO> GetByNameAsync(string username)
+    {
+        var response = await new HttpClientSettings().GetByNameAsync(TransactionNavigation.GetByName, username);
+        if (response.IsSuccessStatusCode ) 
+        {
+            var context = await response.Content.ReadAsStringAsync();
+            var getRecord = JsonConvert.DeserializeObject<UserTransferDTO>(context);
+
+            return getRecord ?? new(ActionStatusType.Failed); 
+        }
+        return new(ActionStatusType.Failed);
+    }
+
 
     public async Task<TransferDTO> CreateAsync(UserDTO dto)
     {

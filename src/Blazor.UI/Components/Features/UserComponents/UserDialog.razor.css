@@ -11,6 +11,16 @@
     padding-right: 0.25rem;
 }
 
+::deep .username-validation-error {
+    color: #b42318;
+    margin-top: -0.5rem;
+}
+
+::deep .username-validation-ok {
+    color: #027a48;
+    margin-top: -0.5rem;
+}
+
 @media (max-width: 640.98px) {
     .user-dialog-actions {
         flex-direction: column;

@@ -1,14 +1,21 @@
 ﻿@page "/"
 @page "/home"
+@using Microsoft.AspNetCore.Components.Web
+@inject ILogger<Home> logger;
 
 <PageTitle>Home</PageTitle>
 
-<h2>@WelcomeMessage</h2>
-<p>@Author</p>
 
-<NavigateToPage Path=@PathVariables.Weather />
-<NavigateToPage Path=@PathVariables.Counter />
-<NavigateToPage Path=@PathVariables.User />
+<div class="home-page">
+    <h2>@WelcomeMessage</h2>
+    <p>@Author</p>
+
+    <div class="home-actions">
+        <NavigateToPage Path=@PathVariables.Weather />
+        <NavigateToPage Path=@PathVariables.Counter />
+        <NavigateToPage Path=@PathVariables.User />
+    </div>
+</div>
 
 @code
 {
@@ -17,7 +24,6 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Console.WriteLine("Home Page Loaded");
+        logger.LogInformation("Home Page: Loaded");
     }
-
 }
