@@ -43,7 +43,7 @@ public partial class UserPage
 
         ToastService.Notify(new(ToastType.Info, "Loading users..."));
         DataSource.Load();
-        await Task.Delay(4000);
+        // await Task.Delay(4000);
         // StateHasChanged();
         var result = await _services.GetAllAsync();
         DataSource.DataSet = result.Records ?? [];

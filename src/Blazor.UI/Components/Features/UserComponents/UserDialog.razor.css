@@ -11,14 +11,38 @@
     padding-right: 0.25rem;
 }
 
-::deep .username-validation-error {
-    color: #b42318;
+.username-validation-message {
+    font-size: 0.75rem;
+    line-height: 1rem;
     margin-top: -0.5rem;
 }
 
-::deep .username-validation-ok {
+.username-validation-error {
+    color: #b42318;
+}
+
+.username-validation-ok {
     color: #027a48;
-    margin-top: -0.5rem;
+}
+
+.username-field ::deep .rz-textbox.username-input-error {
+    border-color: #d92d20;
+    box-shadow: 0 0 0 1px rgba(217, 45, 32, 0.2);
+}
+
+.username-field ::deep .rz-textbox.username-input-error:focus {
+    border-color: #d92d20;
+    box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.18);
+}
+
+.username-field ::deep .rz-textbox.username-input-ok {
+    border-color: #039855;
+    box-shadow: 0 0 0 1px rgba(3, 152, 85, 0.18);
+}
+
+.username-field ::deep .rz-textbox.username-input-ok:focus {
+    border-color: #039855;
+    box-shadow: 0 0 0 3px rgba(3, 152, 85, 0.16);
 }
 
 @media (max-width: 640.98px) {

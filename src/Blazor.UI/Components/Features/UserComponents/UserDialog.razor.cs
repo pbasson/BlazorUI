@@ -12,7 +12,26 @@ public partial class UserDialog
     private string _usernameValidationMessage = string.Empty;
     private bool _usernameExists;
     private bool _isCheckingUsername;
+    private Radzen.Blazor.RadzenTemplateForm<UserDTO>? _userForm;
     string Title {get => (Data.Id == 0) ? "Add" : "Edit"; }
+    private bool ShowUsernameAvailableMessage => !string.IsNullOrEmpty(_usernameValidationMessage) && !_usernameExists;
+    private bool CanSubmit
+    {
+        get
+        {
+            if (_isCheckingUsername || Data == null || string.IsNullOrWhiteSpace(Data.UserName))
+            {
+                return false;
+            }
+
+            if (Data.Id > 0 && string.Equals(Data.UserName, _originalUsername, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return !string.IsNullOrEmpty(_usernameValidationMessage) && !_usernameExists;
+        }
+    }
 
     protected override void OnParametersSet()
     {
@@ -28,7 +47,24 @@ public partial class UserDialog
         }
     }
 
-    async Task SubmitForm() 
+    private bool ValidateUsernameAvailability()
+    {
+        return !_usernameExists;
+    }
+
+    private string GetUsernameInputClass()
+    {
+        if (string.IsNullOrEmpty(_usernameValidationMessage))
+        {
+            return "input-form";
+        }
+
+        return _usernameExists
+            ? "input-form username-input-error"
+            : "input-form username-input-ok";
+    }
+
+    async Task SubmitForm(UserDTO value) 
     {
         if(Data != null && !string.IsNullOrEmpty(Data.UserName))
         { 
@@ -84,5 +120,6 @@ public partial class UserDialog
     public async Task HandleUsername()
     {
         await CheckUsername();
+        _userForm?.EditContext?.Validate();
     }
 }
