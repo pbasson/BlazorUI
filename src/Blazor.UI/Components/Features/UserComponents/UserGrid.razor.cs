@@ -1,3 +1,4 @@
+using Blazor.Core.Models.DTOs.User;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Blazor.UI.Components.Features.UserComponents;
@@ -23,8 +24,8 @@ public partial class UserGrid
     }
 
     private async Task ConfirmButton(MouseEventArgs args, int id) {
-        var getConfirm = await DialogService.Confirm($"{PageStatics.ConfirmDelete}", "MyTitle", 
-                            new ConfirmOptions() { OkButtonText = $"{PageStatics.ConfirmYes}", CancelButtonText = $"{PageStatics.ConfirmCancel}" });
+        var getConfirm = await DialogService.Confirm($"{PageConstants.ConfirmDelete}", "MyTitle", 
+                            new ConfirmOptions() { OkButtonText = $"{PageConstants.ConfirmYes}", CancelButtonText = $"{PageConstants.ConfirmCancel}" });
 
         if(getConfirm != null && (bool)getConfirm) 
         {

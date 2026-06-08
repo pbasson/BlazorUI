@@ -1,4 +1,4 @@
-namespace Blazor.Core.Models.Entities;
+namespace Blazor.Core.Models.DTOs.Transfer;
 
 public class TransferDTO : BaseTransfer
 {
@@ -60,11 +60,3 @@ public static class TransferFactory
     }
 }
 
-public enum TransferEnum
-{
-    DTONull = 0,
-    EntityNotCreated = 1,
-    SaveChangesNotExecuted = 2,
-    EntityNotExist = 3,
-    Conflict = 4,
-}

@@ -1,3 +1,5 @@
+using Blazor.Core.Models.DTOs.User;
+
 namespace Blazor.UI.Services;
 
 public class UserService : IUserService
@@ -13,7 +15,7 @@ public class UserService : IUserService
         try
         {
             _logger.LogInformation("Fetching all user records.");
-            var response = await new HttpClientSettings().GetAllAsync(TransactionNavigation.GetAllRecords);
+            var response = await new HttpClientSettings().GetAllAsync(UserNavigationContants.GetAllRecords);
             if (response.IsSuccessStatusCode )
             {
                 var context = await response.Content.ReadAsStringAsync();
@@ -45,7 +47,7 @@ public class UserService : IUserService
 
     public async Task<UserTransferDTO> GetByIdAsync(int id)
     {
-        var response = await new HttpClientSettings().GetByIdAsync(TransactionNavigation.GetRecordById, id);
+        var response = await new HttpClientSettings().GetByIdAsync(UserNavigationContants.GetRecordById, id);
         if (response.IsSuccessStatusCode ) {
             var context = await response.Content.ReadAsStringAsync();
             var getRecord = JsonConvert.DeserializeObject<UserTransferDTO>(context);
@@ -57,7 +59,7 @@ public class UserService : IUserService
 
     public async Task<UserTransferDTO> GetByNameAsync(string username)
     {
-        var response = await new HttpClientSettings().GetByNameAsync(TransactionNavigation.GetByName, username);
+        var response = await new HttpClientSettings().GetByNameAsync(UserNavigationContants.GetByName, username);
         if (response.IsSuccessStatusCode ) 
         {
             var context = await response.Content.ReadAsStringAsync();
@@ -72,7 +74,7 @@ public class UserService : IUserService
     public async Task<TransferDTO> CreateAsync(UserDTO dto)
     {
         _logger.LogInformation("Creating user with payload: {Payload}", SerializePayload(dto));
-        var response = await new HttpClientSettings().PostAsync(TransactionNavigation.CreateRecord, dto);
+        var response = await new HttpClientSettings().PostAsync(UserNavigationContants.CreateRecord, dto);
         var result = await DeserializeResponseTransfer(response);
         _logger.LogInformation("Create user result: {@Result}", result);
 
@@ -82,7 +84,7 @@ public class UserService : IUserService
     public async Task<TransferDTO> UpdateAsync(UserDTO dto)
     {
         _logger.LogInformation("Updating user {UserId} with payload: {Payload}", dto.Id, SerializePayload(dto));
-        var response = await new HttpClientSettings().PutAsync(TransactionNavigation.UpdateRecord, dto);
+        var response = await new HttpClientSettings().PutAsync(UserNavigationContants.UpdateRecord, dto);
         var result = await DeserializeResponseTransfer(response);
         _logger.LogInformation("Update user {UserId} result: {@Result}", dto.Id, result);
 
@@ -91,7 +93,7 @@ public class UserService : IUserService
 
     public async Task<bool> DeleteAsync(int id)
     {
-        var response = await new HttpClientSettings().DeleteAsync(TransactionNavigation.DeleteRecord, id);
+        var response = await new HttpClientSettings().DeleteAsync(UserNavigationContants.DeleteRecord, id);
         return await DeserializeResponse(response);
     }
 

@@ -20,7 +20,7 @@ public class HttpClientSettings : IHttpClientSettings
             BaseAddress = new Uri(ApiURL),
             Timeout = RequestTimeout
         };
-        _client.DefaultRequestHeaders.Add(API_Statics.ApiKey, ApiKEY);
+        _client.DefaultRequestHeaders.Add(ConfigurationConstants.ApiKey, ApiKEY);
     }
 
     public async Task<HttpResponseMessage> GetAllAsync( string navigate ) {
@@ -117,5 +117,5 @@ public class HttpClientSettings : IHttpClientSettings
         }
     }
 
-    private StringContent GetStringContent(object ob) => new(JsonConvert.SerializeObject(ob), Encoding.UTF8, API_Statics.AppJson);
+    private StringContent GetStringContent(object ob) => new(JsonConvert.SerializeObject(ob), Encoding.UTF8, ConfigurationConstants.AppJson);
 }

@@ -1,3 +1,5 @@
+using Blazor.Core.Models.DTOs.User;
+
 namespace Blazor.UI.Components.Features.UserComponents;
 
 public partial class UserDialog
@@ -11,6 +13,7 @@ public partial class UserDialog
     private string _originalUsername = string.Empty;
     private string _usernameValidationMessage = string.Empty;
     private bool _usernameExists;
+    private bool _usernameSame {get => Data.Id > 0 && string.Equals(Data.UserName, _originalUsername, StringComparison.OrdinalIgnoreCase);}
     private bool _isCheckingUsername;
     private Radzen.Blazor.RadzenTemplateForm<UserDTO>? _userForm;
     string Title {get => (Data.Id == 0) ? "Add" : "Edit"; }
@@ -19,16 +22,8 @@ public partial class UserDialog
     {
         get
         {
-            if (_isCheckingUsername || Data == null || string.IsNullOrWhiteSpace(Data.UserName))
-            {
-                return false;
-            }
-
-            if (Data.Id > 0 && string.Equals(Data.UserName, _originalUsername, StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
-
+            bool checkSubmit = _isCheckingUsername || Data == null || string.IsNullOrWhiteSpace(Data.UserName) || _usernameSame ;
+            if (checkSubmit) { return false; }
             return !string.IsNullOrEmpty(_usernameValidationMessage) && !_usernameExists;
         }
     }
@@ -95,12 +90,7 @@ public partial class UserDialog
         _usernameValidationMessage = string.Empty;
         _usernameExists = false;
 
-        if(Data == null || string.IsNullOrWhiteSpace(Data.UserName))
-        {
-            return false;
-        }
-
-        if (Data.Id > 0 && string.Equals(Data.UserName, _originalUsername, StringComparison.OrdinalIgnoreCase))
+        if(Data == null || string.IsNullOrWhiteSpace(Data.UserName) || _usernameSame)
         {
             return false;
         }

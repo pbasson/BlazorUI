@@ -1,4 +1,4 @@
-namespace Blazor.Core.Models.Entities;
+namespace Blazor.Core.Models.DTOs.Module;
 
 public class WeatherForecast : IEntity
 {
@@ -14,7 +14,7 @@ public class WeatherForecast : IEntity
     {
         if(WeatherSummary != null)   
         {
-            return $"{WeatherStatics.GetWeatherType(WeatherSummary.Type).Icon} {WeatherSummary.Name}"; 
+            return $"{WeatherConstants.GetWeatherType(WeatherSummary.Type).Icon} {WeatherSummary.Name}"; 
         }
 
         return string.Empty;

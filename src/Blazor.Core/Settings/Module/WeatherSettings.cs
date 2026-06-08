@@ -1,8 +1,8 @@
-namespace Blazor.Core.Models.Settings;
+namespace Blazor.Core.Settings.Module;
 
 public class WeatherSettings : HeaderListSettings<WeatherForecast>
 {
-    public override string Title { get; set; } = @PageStatics.WeatherPage;
+    public override string Title { get; set; } = PageConstants.WeatherPage;
     
     public int MinWeather()
     {
@@ -40,7 +40,7 @@ public class WeatherSettings : HeaderListSettings<WeatherForecast>
                 .Select(x => new { Element = x.Key, Counter = x.Count() } )
                 .OrderByDescending( x => x.Counter).ToList();
 
-            var getWeatherType = WeatherStatics.GetWeatherType(getGroupSummary[0].Element);
+            var getWeatherType = WeatherConstants.GetWeatherType(getGroupSummary[0].Element);
             var summary = $"{getWeatherType.Icon} {getWeatherType.Name}: {getGroupSummary[0].Counter} Days";
             
             return $"  {summary}";

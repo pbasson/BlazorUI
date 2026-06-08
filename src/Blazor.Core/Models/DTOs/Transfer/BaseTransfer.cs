@@ -1,4 +1,4 @@
-namespace Blazor.Core.Models.Entities;
+namespace Blazor.Core.Models.DTOs.Transfer;
 
 public class BaseTransfer
 {

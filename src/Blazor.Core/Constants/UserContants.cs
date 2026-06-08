@@ -1,10 +1,10 @@
 namespace Blazor.Core.Constants;
 
-public readonly struct TransactionStatics
+public readonly struct UserContants
 {
 }
 
-public readonly struct TransactionNavigation
+public readonly struct UserNavigationContants
 {
     public readonly static string Module = "user";
     public readonly static string parameter = "{0}";

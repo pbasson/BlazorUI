@@ -1,4 +1,4 @@
-namespace Blazor.UI.Utility;
+namespace Blazor.UI.Configuration;
 
 public static class ConfigHandler
 {

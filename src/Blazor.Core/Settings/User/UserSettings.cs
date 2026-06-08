@@ -1,4 +1,4 @@
-namespace Blazor.Core.Models.Settings;
+namespace Blazor.Core.Settings.User;
 
 public class UserSettings : HeaderListSettings<UserDTO>
 {
