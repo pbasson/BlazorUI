@@ -1,4 +1,4 @@
-namespace Blazor.Core.Interfaces.Services;
+namespace Blazor.Core.Interfaces.Services.User;
 
 public interface IUserService
 {

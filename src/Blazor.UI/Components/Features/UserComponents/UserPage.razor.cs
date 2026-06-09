@@ -1,4 +1,6 @@
-namespace Blazor.UI.Components.Features.FeaturePages;
+using Blazor.UI.Services.User;
+
+namespace Blazor.UI.Components.Features.UserComponents;
 
 public partial class UserPage
 {

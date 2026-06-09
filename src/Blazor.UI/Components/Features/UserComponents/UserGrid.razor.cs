@@ -1,4 +1,5 @@
 using Blazor.Core.Models.DTOs.User;
+using Blazor.UI.Services.User;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Blazor.UI.Components.Features.UserComponents;

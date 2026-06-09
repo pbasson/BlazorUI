@@ -1,20 +1,14 @@
-using Blazor.Core.Models.DTOs.User;
+namespace Blazor.UI.Services.User;
 
-namespace Blazor.UI.Services;
-
-public class UserService : IUserService
+public class UserService : BaseService, IUserService
 {
-    private readonly ILogger<UserService> _logger;
+    private readonly ILogger<UserService> _logger = new LoggerFactory().CreateLogger<UserService>();
 
-    public UserService(ILogger<UserService> logger)
+    public async Task<UserTransferGridDTO> GetAllAsync() 
     {
-        _logger = logger;
-    }
-
-    public async Task<UserTransferGridDTO> GetAllAsync() {
         try
         {
-            _logger.LogInformation("Fetching all user records.");
+            _logger.LogInformation("User: Fetch All User Records.");
             var response = await new HttpClientSettings().GetAllAsync(UserNavigationContants.GetAllRecords);
             if (response.IsSuccessStatusCode )
             {
@@ -29,18 +23,18 @@ public class UserService : IUserService
             }
 
             _logger.LogWarning(
-                "Failed to fetch all user records. API returned status code {StatusCode}.",
+                "User: Failed to fetch all user records. API returned status code {StatusCode}.",
                 response.StatusCode);
             return new(ActionStatusType.Failed);
         }
         catch (JsonException ex)
         {
-            _logger.LogError(ex, "Invalid JSON returned while fetching all user records.");
+            _logger.LogError(ex, "User: Invalid JSON returned while fetching all user records.");
             return new(ActionStatusType.Failed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An unexpected error occurred while fetching all user records.");
+            _logger.LogError(ex, "User: An unexpected error occurred while fetching all user records.");
             return new(ActionStatusType.Failed);
         }
     }
@@ -105,22 +99,5 @@ public class UserService : IUserService
             return JsonConvert.DeserializeObject<bool>(context);
         }
         return false;
-    }
-
-    private static async Task<TransferDTO> DeserializeResponseTransfer(HttpResponseMessage response)
-    {
-        var errorTransfer = new TransferDTO(0, "Request Failed", ServiceResultType.Failed, actionStatusType: ActionStatusType.InternalServerError);
-        if (response.IsSuccessStatusCode )
-        {
-            var context = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<TransferDTO>(context);
-            return result != null ? result : errorTransfer;
-        }
-        return errorTransfer;
-    }
-
-    private static string SerializePayload(object payload)
-    {
-        return JsonConvert.SerializeObject(payload);
     }
 }

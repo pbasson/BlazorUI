@@ -1,4 +1,4 @@
-using Blazor.Core.Models.DTOs.User;
+using Blazor.UI.Services.User;
 
 namespace Blazor.UI.Components.Features.UserComponents;
 

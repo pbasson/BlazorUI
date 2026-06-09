@@ -1,3 +1,6 @@
+using Blazor.UI.Services.Module;
+using Blazor.UI.Services.User;
+
 namespace Blazor.UI.Configuration;
 
 public static class RegisterDataServices
@@ -6,7 +9,7 @@ public static class RegisterDataServices
     {
         services.AddScoped<DialogService>();
 
-        services.AddScoped<WeatherServices>();
+        services.AddScoped<WeatherService>();
         services.AddScoped<UserService>();
         return services;
     }

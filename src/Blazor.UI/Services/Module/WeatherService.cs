@@ -1,6 +1,6 @@
-namespace Blazor.UI.Services;
+namespace Blazor.UI.Services.Module;
 
-public class WeatherServices
+public class WeatherService
 {
     public async Task<List<WeatherForecast>> GetWeatherForecastAsync(List<WeatherForecast> datasource)
     {
