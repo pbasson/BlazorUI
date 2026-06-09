@@ -6,7 +6,6 @@ public partial class UserGrid
     public List<UserDTO>? DataSet {get; set;}
     [Inject]
     UserService Service {get; set;} = default!;
-    string NoDataset = "No DataSet is Available";
 
     private async Task AddRecord(MouseEventArgs args) 
     {
@@ -43,7 +42,6 @@ public partial class UserGrid
         var result = await Service.GetAllAsync();
         DataSet = result.Records;
     }
-
 
     DialogOptions SetOption() => new DialogOptions
     {

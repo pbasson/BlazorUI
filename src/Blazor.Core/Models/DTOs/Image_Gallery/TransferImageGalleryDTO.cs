@@ -11,11 +11,11 @@ public class TransferImageGalleryDTO : BaseTransfer
     }
 }
 
-public class TransferImageGalleryGridDTO : BaseTransfer
+public class ImageGalleryTransferGridDTO : BaseTransfer
 {
     public List<ImageGalleryDTO>? Records { get; set; }
 
-    public TransferImageGalleryGridDTO(ActionStatusType statusType, List<ImageGalleryDTO>? records = null)
+    public ImageGalleryTransferGridDTO(ActionStatusType statusType, List<ImageGalleryDTO>? records = null)
     {
         ActionStatusType = statusType;
         Records = records;

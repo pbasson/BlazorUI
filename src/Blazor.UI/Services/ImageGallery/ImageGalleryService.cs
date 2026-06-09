@@ -4,7 +4,7 @@ public class ImageGalleryService : BaseService, IImageGalleryService
 {
     private readonly ILogger<ImageGalleryService> _logger = new LoggerFactory().CreateLogger<ImageGalleryService>();
 
-    public async Task<TransferImageGalleryGridDTO> GetAllRecordsAsync()
+    public async Task<ImageGalleryTransferGridDTO> GetAllRecordsAsync()
     {
         try
         {
@@ -13,7 +13,7 @@ public class ImageGalleryService : BaseService, IImageGalleryService
             if (response.IsSuccessStatusCode )
             {
                 var context = await response.Content.ReadAsStringAsync();
-                var getRecord = JsonConvert.DeserializeObject<TransferImageGalleryGridDTO>(context);
+                var getRecord = JsonConvert.DeserializeObject<ImageGalleryTransferGridDTO>(context);
                 
                 if (getRecord != null && getRecord.Records != null)
                 {
@@ -39,7 +39,7 @@ public class ImageGalleryService : BaseService, IImageGalleryService
         }
     }
 
-    public async Task<TransferImageGalleryGridDTO> GetRecordsByPaginationAsync(int page)
+    public async Task<ImageGalleryTransferGridDTO> GetRecordsByPaginationAsync(int page)
     {
         try
         {
@@ -48,7 +48,7 @@ public class ImageGalleryService : BaseService, IImageGalleryService
             if (response.IsSuccessStatusCode )
             {
                 var context = await response.Content.ReadAsStringAsync();
-                var getRecord = JsonConvert.DeserializeObject<TransferImageGalleryGridDTO>(context);
+                var getRecord = JsonConvert.DeserializeObject<ImageGalleryTransferGridDTO>(context);
                 
                 if (getRecord != null && getRecord.Records != null)
                 {

@@ -2,7 +2,7 @@ namespace Blazor.Core.Constants;
 
 public readonly struct ImageGalleryNavigation
 {
-    public const string Module = "user";
+    public const string Module = "image-gallery";
     public const string parameter = "{0}";
 
     public const string GetAllRecords = $"{Module}";

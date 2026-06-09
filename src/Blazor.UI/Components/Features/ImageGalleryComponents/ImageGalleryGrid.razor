@@ -1,5 +1,5 @@
 
-@if(DataSet != null && DataSet.Any() ) 
+@if(DataSet != null && DataSet.Count > 0  ) 
 { 
     <RadzenDataGrid Data="@DataSet" TItem="ImageGalleryDTO"
             AllowColumnResize="true" 

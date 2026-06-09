@@ -3,33 +3,13 @@ namespace Blazor.Core.Settings.Module;
 public class WeatherSettings : HeaderListSettings<WeatherForecast>
 {
     public override string Title { get; set; } = WeatherConstants.WeatherPage;
-    
-    public int MinWeather()
-    {
-        if (DataSet.Count > 0)
-        {
-            return DataSet.Select(x => x.TemperatureC).Min();
-        }
-        return 0;
-    } 
 
-    public int MaxWeather()
-    {
-        if (DataSet.Count > 0)
-        {
-            return DataSet.Select(x => x.TemperatureC).Max();
-        }
-        return 0;
-    } 
+    public int MinWeather() => DataSet.Count > 0 ? DataSet.Min(x => x.TemperatureC) : 0;
 
-    public double AvgWeather()
-    {
-        if (DataSet.Count > 0)
-        {
-            return Math.Round( DataSet.Select(x => x.TemperatureC).Average(), 2 );
-        }
-        return 0;
-    } 
+    public int MaxWeather() => DataSet.Count > 0 ? DataSet.Max(x => x.TemperatureC) : 0;
+
+    public double AvgWeather() =>
+        DataSet.Count > 0 ? Math.Round(DataSet.Average(x => x.TemperatureC), 2) : 0;
 
     public string GetSummaryDisplay()
     {
