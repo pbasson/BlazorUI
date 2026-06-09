@@ -2,14 +2,17 @@ namespace Blazor.Core.Constants;
 
 public static class WeatherConstants 
 {
-    public static List<KeyIconTable> WeatherType { get; set; } = 
+    public const string WeatherPage  = "Weather";
+    public const string WeatherPageDetails  = "Page Demonstrates Data Loading and Reseting of the Weather."; 
+
+    public static readonly List<KeyIconTable> WeatherType = 
     [  
         new KeyIconTable{ Id = 1, Name = "Cold", Icon = "<i class=\"bi bi-snow\"></i>" },
         new KeyIconTable{ Id = 2, Name = "Neutral", Icon = "<i class=\"bi bi-moisture\"></i>"},
         new KeyIconTable{ Id = 3, Name = "Hot", Icon = "<i class=\"bi bi-sun\"></i>"},
     ];
 
-    public static List<KeyTypeTable> WeatherRange =
+    public static readonly List<KeyTypeTable> WeatherRange =
     [
         new KeyTypeTable{ Id = 1, Name = "Freezing" , Type = 1 },    
         new KeyTypeTable{ Id = 2, Name = "Bracing", Type = 1 },    

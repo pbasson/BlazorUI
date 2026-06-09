@@ -1,5 +1,5 @@
 @page "/ImageGallery"
-@* 
+
 <h2>@DataSource.Title</h2>
 
 <NavigateHome />
@@ -10,6 +10,6 @@
 }
 else
 {
-    <UserGrid DataSet="@DataSource.DataSet"/>
+    <ImageGalleryGrid DataSet="@DataSource.DataSet"/>
     <br />
-} *@
+}

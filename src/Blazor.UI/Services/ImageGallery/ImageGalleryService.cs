@@ -23,18 +23,18 @@ public class ImageGalleryService : BaseService, IImageGalleryService
             }
 
             _logger.LogWarning(
-                "User: Failed to fetch all user records. API returned status code {StatusCode}.",
+                "Image: Failed to fetch all user records. API returned status code {StatusCode}.",
                 response.StatusCode);
             return new(ActionStatusType.Failed);
         }
         catch (JsonException ex)
         {
-            _logger.LogError(ex, "User: Invalid JSON returned while fetching all user records.");
+            _logger.LogError(ex, "Image: Invalid JSON returned while fetching all user records.");
             return new(ActionStatusType.Failed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "User: An unexpected error occurred while fetching all user records.");
+            _logger.LogError(ex, "Image: An unexpected error occurred while fetching all user records.");
             return new(ActionStatusType.Failed);
         }
     }
@@ -52,24 +52,24 @@ public class ImageGalleryService : BaseService, IImageGalleryService
                 
                 if (getRecord != null && getRecord.Records != null)
                 {
-                    _logger.LogInformation("Successfully fetched all user records.");
+                    _logger.LogInformation("Image: Successfully fetched all records.");
                     return getRecord;
                 }
             }
 
             _logger.LogWarning(
-                "User: Failed to fetch all user records. API returned status code {StatusCode}.",
+                "Image: Failed to fetch all user records. API returned status code {StatusCode}.",
                 response.StatusCode);
             return new(ActionStatusType.Failed);
         }
         catch (JsonException ex)
         {
-            _logger.LogError(ex, "User: Invalid JSON returned while fetching all user records.");
+            _logger.LogError(ex, "Image: Invalid JSON returned while fetching all user records.");
             return new(ActionStatusType.Failed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "User: An unexpected error occurred while fetching all user records.");
+            _logger.LogError(ex, "User: An unexpected error occurred while fetching all records.");
             return new(ActionStatusType.Failed);
         }
     }
@@ -87,7 +87,7 @@ public class ImageGalleryService : BaseService, IImageGalleryService
     }
     public async Task<TransferDTO> CreateRecordAsync(CreateImageGalleryDTO dto)
     {
-        _logger.LogInformation("Creating user with payload: {Payload}", SerializePayload(dto));
+        _logger.LogInformation("Image: Creating Record with payload: {Payload}", SerializePayload(dto));
         var response = await new HttpClientSettings().PostAsync(ImageGalleryNavigation.CreateRecord, dto);
         var result = await DeserializeResponseTransfer(response);
         _logger.LogInformation("Create user result: {@Result}", result);
@@ -97,10 +97,10 @@ public class ImageGalleryService : BaseService, IImageGalleryService
 
     public async Task<TransferDTO> UpdateRecordAsync(UpdateImageGalleryDTO dto)
     {
-        _logger.LogInformation("Updating user {UserId} with payload: {Payload}", dto.ImageGalleryId, SerializePayload(dto));
+        _logger.LogInformation("Updating Record {UserId} with payload: {Payload}", dto.ImageGalleryId, SerializePayload(dto));
         var response = await new HttpClientSettings().PutAsync(UserNavigationContants.UpdateRecord, dto);
         var result = await DeserializeResponseTransfer(response);
-        _logger.LogInformation("Update user {UserId} result: {@Result}", dto.ImageGalleryId, result);
+        _logger.LogInformation("Update Record {UserId} result: {@Result}", dto.ImageGalleryId, result);
 
         return result;
     }

@@ -1,7 +1,3 @@
-using Blazor.Core.Models.DTOs.User;
-using Blazor.UI.Services.User;
-using Microsoft.AspNetCore.Components.Web;
-
 namespace Blazor.UI.Components.Features.UserComponents;
 
 public partial class UserGrid
@@ -9,7 +5,7 @@ public partial class UserGrid
     [Parameter] 
     public List<UserDTO>? DataSet {get; set;}
     [Inject]
-    UserService service {get; set;} = default!;
+    UserService Service {get; set;} = default!;
     string NoDataset = "No DataSet is Available";
 
     private async Task AddRecord(MouseEventArgs args) 
@@ -25,12 +21,12 @@ public partial class UserGrid
     }
 
     private async Task ConfirmButton(MouseEventArgs args, int id) {
-        var getConfirm = await DialogService.Confirm($"{PageConstants.ConfirmDelete}", "MyTitle", 
-                            new ConfirmOptions() { OkButtonText = $"{PageConstants.ConfirmYes}", CancelButtonText = $"{PageConstants.ConfirmCancel}" });
+        var getConfirm = await DialogService.Confirm($"{ConfirmConstants.Delete}", "MyTitle", 
+            new ConfirmOptions() { OkButtonText = $"{ConfirmConstants.Yes}", CancelButtonText = $"{ConfirmConstants.Cancel}" });
 
         if(getConfirm != null && (bool)getConfirm) 
         {
-            var deleted = await service.DeleteAsync(id); 
+            var deleted = await Service.DeleteAsync(id); 
             if (deleted)
             {
                 toastService.Notify(new(ToastType.Success, "User deleted successfully."));
@@ -44,15 +40,14 @@ public partial class UserGrid
 
     private async Task UpdateGetAll()
     {
-        var result = await service.GetAllAsync();
+        var result = await Service.GetAllAsync();
         DataSet = result.Records;
     }
 
 
-    DialogOptions SetOption() {
-        return new DialogOptions {
-            Width = "min(700px, calc(100vw - 2rem))", 
-            Height = "auto",
-        };
-    }
+    DialogOptions SetOption() => new DialogOptions
+    {
+        Width = "min(700px, calc(100vw - 2rem))",
+        Height = "auto",
+    };
 }    

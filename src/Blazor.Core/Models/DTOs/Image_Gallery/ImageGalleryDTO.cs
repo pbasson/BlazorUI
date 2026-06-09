@@ -1,6 +1,6 @@
 namespace Blazor.Core.Models.DTOs.Image_Gallery;
 
-public class ImageGalleryDTO : BaseDTO 
+public class ImageGalleryDTO : IEntity 
 {
     public int ImageGalleryId { get; set; }
     public string? GalleryName { get; set; }

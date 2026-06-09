@@ -1,0 +1,17 @@
+
+@if(DataSet != null && DataSet.Any() ) 
+{ 
+    <RadzenDataGrid Data="@DataSet" TItem="ImageGalleryDTO"
+            AllowColumnResize="true" 
+            AllowAlternatingRows="false" 
+            AllowSorting="true" Count="@DataSet.Count"
+            PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            AllowPaging="true" PageSize="20" 
+            ColumnWidth="200px" >
+        <Columns>
+            <RadzenDataGridColumn TItem="ImageGalleryDTO" Property="GalleryName" Title="GalleryName"   />
+            <RadzenDataGridColumn TItem="ImageGalleryDTO" Property="GalleryPath" Title="GalleryPath"   />
+        </Columns>
+    </RadzenDataGrid>
+} 
+else  { <p>@NoDataset</p> }

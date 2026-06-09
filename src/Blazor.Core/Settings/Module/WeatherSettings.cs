@@ -2,7 +2,7 @@ namespace Blazor.Core.Settings.Module;
 
 public class WeatherSettings : HeaderListSettings<WeatherForecast>
 {
-    public override string Title { get; set; } = PageConstants.WeatherPage;
+    public override string Title { get; set; } = WeatherConstants.WeatherPage;
     
     public int MinWeather()
     {

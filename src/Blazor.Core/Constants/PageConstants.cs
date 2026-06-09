@@ -1,11 +1,14 @@
 namespace Blazor.Core.Constants;
 
-public static class PageConstants
+public readonly struct PageConstants
 {
-    public static string ConfirmDelete { get; set; } = "Confirm Deleting Record?";
-    public static string ConfirmYes { get; set; } = "Yes";
-    public static string ConfirmCancel { get; set; } = "Cancel";
-    public static string WeatherPage { get; set; } = "Weather";
+    public const string NoDataset =  "No DataSet is Available"; 
+}
 
-    public static string WeatherPageDetails { get; set; } = "Page Demonstrates Data Loading and Reseting of the Weather."; 
+public readonly struct ConfirmConstants
+{
+    public const string Yes = "Yes"; 
+    public const string No = "No"; 
+    public const string Cancel = "Cancel";
+    public const string Delete = "Confirm Deleting Record?";
 }
