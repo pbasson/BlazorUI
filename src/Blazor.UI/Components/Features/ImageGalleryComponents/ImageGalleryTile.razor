@@ -1,0 +1,54 @@
+<div class="@TileClass">
+    @if (Gallery is not null)
+    {
+        var imageSource = GetImageSource(Gallery);
+
+        @if (!string.IsNullOrWhiteSpace(imageSource))
+        {
+            <a href="@DetailsUrl" class="image-gallery-link"> 
+                <img class="image-gallery-photo" src="@imageSource" alt="@Gallery.GalleryName" />
+            </a>
+        }
+        else
+        {
+            <a href="@DetailsUrl" class="image-gallery-link">
+                <div class="image-gallery-photo image-gallery-photo-placeholder"></div>
+            </a>
+        }
+
+        <div class="image-gallery-name">@DisplayText(Gallery.GalleryName)</div>
+        <div class="image-gallery-path">@DisplayText(Gallery.GalleryPath)</div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public ImageGalleryDTO? Gallery { get; set; }
+
+    private string TileClass => Gallery is null
+        ? "image-gallery-card image-gallery-card-empty"
+        : "image-gallery-card";
+
+    private string DetailsUrl => $"/ImageGalleryDetails/{Gallery?.ImageGalleryId}";
+
+    private static string? GetImageSource(ImageGalleryDTO gallery)
+    {
+        var imageName = gallery.ImageFile?
+            .OrderBy(image => image.ImagePosition)
+            .FirstOrDefault()?.ImageName;
+
+        if (string.IsNullOrWhiteSpace(imageName))
+        {
+            return gallery.GalleryPath;
+        }
+
+        if (Uri.IsWellFormedUriString(imageName, UriKind.Absolute) || string.IsNullOrWhiteSpace(gallery.GalleryPath))
+        {
+            return imageName;
+        }
+
+        return $"{gallery.GalleryPath.TrimEnd('/')}/{imageName.TrimStart('/')}";
+    }
+
+    private static string DisplayText(string? value) => string.IsNullOrWhiteSpace(value) ? "N/A" : value;
+}

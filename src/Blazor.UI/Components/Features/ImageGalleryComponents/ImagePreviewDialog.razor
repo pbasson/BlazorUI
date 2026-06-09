@@ -1,0 +1,18 @@
+<style>
+    .image-preview {
+        max-width: 100%; 
+        max-height: 80vh; 
+        display: block; 
+        margin: auto;
+    }
+</style>
+
+<img src="@ImageSource" alt="@ImageName" class="image-preview" />
+
+@code {
+    [Parameter]
+    public string ImageSource { get; set; } = string.Empty;
+
+    [Parameter]
+    public string ImageName { get; set; } = string.Empty;
+}

@@ -1,10 +1,10 @@
-﻿<button class="btn btn-primary" @onclick="@( () => NavigateTo(Path) )" > @Path </button>
+﻿<button class="btn btn-primary" @onclick="@( () => NavigateTo(Path!) )" > @Path </button>
 
 @code {
     [Inject] 
     NavigationManager _navManager { get; set; } = default!;
     [Parameter] [Required] 
-    public string Path {get; set;}
+    public string? Path {get; set;}
   
     void NavigateTo(string navigate)
     {

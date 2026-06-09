@@ -6,6 +6,11 @@ public partial class ImageGalleryGrid
     public List<ImageGalleryDTO>? DataSet {get; set;}
     [Inject]
     UserService Service {get; set;} = default!;
-    readonly string NoDataset = "No DataSet is Available";
+    private const int ItemsPerRow = 5;
+    private const int RowsPerPage = 4;
 
+    private IEnumerable<ImageGalleryRow> GalleryRows => 
+        DataSet?.Chunk(ItemsPerRow).Select(items => new ImageGalleryRow(items)) ?? [];
+
+    private sealed record ImageGalleryRow(ImageGalleryDTO[] Items);
 }

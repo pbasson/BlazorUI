@@ -1,0 +1,66 @@
+<div class="@TileClass">
+    @if (ImageFile is not null)
+    {
+        var imageSource = GetImageSource();
+
+        @if (!string.IsNullOrWhiteSpace(imageSource))
+        {
+            <img class="image-gallery-photo" src="@imageSource" alt="@ImageFile.ImageName" @onclick="() => OpenPreview(imageSource)"  />
+        }
+        else
+        {
+            <div class="image-gallery-photo image-gallery-photo-placeholder"></div>
+        }
+
+        <div class="image-gallery-name">@DisplayText(ImageFile.ImageName)</div>
+        <div class="image-gallery-path">@DisplayText(GalleryPath)</div>
+    }
+</div>
+
+@code {
+    [Inject]
+    DialogService DialogService { get; set; } = default!;
+
+    [Parameter]
+    public string? GalleryPath { get; set; }
+
+    [Parameter]
+    public ImageFileDTO? ImageFile { get; set; }
+
+    private string TileClass => ImageFile is null ? "image-gallery-card image-gallery-card-empty" : "image-gallery-card";
+
+    private string? GetImageSource()
+    {
+        if (ImageFile is null || string.IsNullOrWhiteSpace(ImageFile.ImageName))
+        {
+            return GalleryPath;
+        }
+
+        if (Uri.IsWellFormedUriString(ImageFile.ImageName, UriKind.Absolute) || string.IsNullOrWhiteSpace(GalleryPath))
+        {
+            return ImageFile.ImageName;
+        }
+
+        return $"{GalleryPath.TrimEnd('/')}/{ImageFile.ImageName.TrimStart('/')}";
+    }
+
+    private static string DisplayText(string? value) => string.IsNullOrWhiteSpace(value) ? "N/A" : value;
+
+    private async Task OpenPreview(string imageSource)
+    {
+        await DialogService.OpenAsync<ImagePreviewDialog>(
+            ImageFile?.ImageName ?? "Image Preview",
+            new Dictionary<string, object>
+            {
+                { "ImageSource", imageSource },
+                { "ImageName", ImageFile?.ImageName ?? string.Empty }
+            },
+            new DialogOptions
+            {
+                Width = "100%",
+                Height = "100%",
+                Resizable = false,
+                Draggable = false
+            });
+    }
+}

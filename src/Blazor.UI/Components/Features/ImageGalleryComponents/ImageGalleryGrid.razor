@@ -1,17 +1,29 @@
-
 @if(DataSet != null && DataSet.Count > 0  ) 
 { 
-    <RadzenDataGrid Data="@DataSet" TItem="ImageGalleryDTO"
-            AllowColumnResize="true" 
-            AllowAlternatingRows="false" 
-            AllowSorting="true" Count="@DataSet.Count"
+    <RadzenDataGrid Data="@GalleryRows" TItem="ImageGalleryRow"
+            AllowPaging="true" PageSize="@RowsPerPage"
             PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-            AllowPaging="true" PageSize="20" 
-            ColumnWidth="200px" >
+            AllowSorting="false"
+            AllowColumnResize="false"
+            AllowAlternatingRows="false"
+            Class="image-gallery-grid">
         <Columns>
-            <RadzenDataGridColumn TItem="ImageGalleryDTO" Property="GalleryName" Title="GalleryName"   />
-            <RadzenDataGridColumn TItem="ImageGalleryDTO" Property="GalleryPath" Title="GalleryPath"   />
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(0)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(1)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(2)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(3)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(4)" /></Template>
+            </RadzenDataGridColumn>
         </Columns>
     </RadzenDataGrid>
 } 
-else  { <p>@NoDataset</p> }
+else  { <p>@PageConstants.NoDataset</p> }
