@@ -1,20 +1,31 @@
 ﻿@inherits LayoutComponentBase
+<RadzenComponents  />
+<RadzenDialog />
+<Toasts class="p-3" AutoHide="true" Delay="5000" Placement="ToastsPlacement.TopRight" />
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+<div class="page containerStyle">
+    <div class="sidebar @(_isNavCollapsed ? "collapsed" : null)">
+        <NavMenu IsCollapsed="@_isNavCollapsed" OnToggle="ToggleNav" />
     </div>
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+        <TopBarComponent Title="Blazor UI By Preetpal Basson" />
 
         <article class="content px-4">
             @Body
         </article>
+    
     </main>
 </div>
+
+@code {
+    private bool _isNavCollapsed;
+
+    private void ToggleNav()
+    {
+        _isNavCollapsed = !_isNavCollapsed;
+    }
+}
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.

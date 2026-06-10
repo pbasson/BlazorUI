@@ -1,0 +1,23 @@
+.home-page {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 7rem);
+    text-align: center;
+}
+
+.home-page h2 {
+    margin-bottom: 0.5rem;
+}
+
+.home-page p {
+    margin-bottom: 1.5rem;
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+}

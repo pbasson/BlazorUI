@@ -1,0 +1,44 @@
+﻿@page "/Weather"
+
+<PageTitle>@WeatherConstants.WeatherPage</PageTitle>
+
+<h1>@DataSource.Title</h1>
+
+<p>@WeatherConstants.WeatherPageDetails</p>
+
+<NavigateHome />
+
+@if (DataSource.Loading)
+{
+    <LoadingComponent />
+}
+else
+{
+    <button class="btn btn-primary btn-space" @onclick="LoadData"><i class="bi bi-arrow-right"></i> Load More</button>
+    <button class="btn btn-primary btn-space" @onclick="@( () => DataSource.ReloadData() )"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+
+    <WeatherSummaryGrid Settings="@DataSource" />
+    <WeatherGrid DataSource="@DataSource.DataSet" />
+}
+
+@code {
+    [Inject] 
+    WeatherService _services { get; set; } = default!;
+
+    private WeatherSettings DataSource { get; set; } = new ();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        DataSource.DataSet = await _services.GetWeatherForecastAsync(DataSource.DataSet);
+        if(DataSource != null && DataSource.DataSet != null && DataSource.DataSet.Any() )
+        {
+            DataSource.Unload();
+        }
+    }
+
+}

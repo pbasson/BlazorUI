@@ -6,11 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Blazor.Bootstrap" Version="3.5.0" />
     <PackageReference Include="ElmahCore" Version="2.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components/TransactionComponents/" />
+    <PackageReference Include="Radzen.Blazor" Version="5.7.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../Blazor.Core/Blazor.Core.csproj" />

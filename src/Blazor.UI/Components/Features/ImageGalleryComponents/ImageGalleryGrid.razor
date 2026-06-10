@@ -1,0 +1,29 @@
+@if(DataSet != null && DataSet.Count > 0  ) 
+{ 
+    <RadzenDataGrid Data="@GalleryRows" TItem="ImageGalleryRow"
+            AllowPaging="true" PageSize="@RowsPerPage"
+            PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            AllowSorting="false"
+            AllowColumnResize="false"
+            AllowAlternatingRows="false"
+            Class="image-gallery-grid">
+        <Columns>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(0)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(1)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(2)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(3)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageGalleryRow">
+                <Template Context="row"><ImageGalleryTile Gallery="@row.Items.ElementAtOrDefault(4)" /></Template>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+} 
+else  { <p>@PageConstants.NoDataset</p> }

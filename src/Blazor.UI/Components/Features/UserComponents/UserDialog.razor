@@ -1,0 +1,51 @@
+@inject Radzen.DialogService dialogService
+@inject ILogger<UserDialog> logger;
+
+<RadzenTemplateForm TItem="UserDTO" Data="@Data" Submit="@SubmitForm" @ref="_userForm">
+    <RadzenStack Gap="1.25rem" class="user-dialog-form">
+        <RadzenCard class="user-dialog-card">
+            <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3" Text="@Title" class="rz-mb-4" />
+            <RadzenStack Gap="1rem">
+                <div class="username-field input-form">
+                    <RadzenFormField Text="Username" class="input-form">
+                        <RadzenTextBox @bind-Value="@Data.UserName"
+                                       Name="Username"
+                                       Placeholder="Enter Username"
+                                       class="@GetUsernameInputClass()"
+                                       Change="@HandleUsername" />
+                    </RadzenFormField>
+                </div>
+                <RadzenRequiredValidator Component="Username"
+                                         Text="Username is required"
+                                         Style="color: #b42318; font-size: 0.75rem; line-height: 1rem; margin-top: -0.5rem;" />
+                <RadzenCustomValidator Component="Username"
+                                       Validator="@ValidateUsernameAvailability"
+                                       Text="@_usernameValidationMessage"
+                                       Style="color: #b42318; font-size: 0.75rem; line-height: 1rem; margin-top: -0.5rem;" />
+                @if (ShowUsernameAvailableMessage)
+                {
+                    <div class="username-validation-message username-validation-ok">
+                        @_usernameValidationMessage
+                    </div>
+                }
+                <RadzenFormField Text="Firstname">
+                    <RadzenTextBox @bind-Value="@Data.FirstName" Name="Firstname" Placeholder="Enter Firstname" class="input-form" />
+                </RadzenFormField>
+                <RadzenFormField Text="Lastname">
+                    <RadzenTextBox @bind-Value="@Data.LastName" Name="Lastname" Placeholder="Enter Lastname" class="input-form"/>
+                </RadzenFormField>
+                <RadzenFormField Text="Date Of Birth">
+                    <RadzenDatePicker @bind-Value="@DateOfBirthValue" Name="Date Of Birth" Placeholder="Select Date" class="input-form" />
+                </RadzenFormField>
+                <RadzenFormField Text="Email">
+                    <RadzenTextBox @bind-Value="@Data.Email" Name="Email" Placeholder="Enter Email" class="input-form" />
+                </RadzenFormField>
+            </RadzenStack>
+        </RadzenCard>
+
+        <RadzenStack Orientation="Radzen.Orientation.Horizontal" Gap="0.75rem" JustifyContent="JustifyContent.End" class="user-dialog-actions">
+            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="@(_isCheckingUsername ? "Checking..." : "Submit")" Disabled="@(!CanSubmit)" />
+            <RadzenButton ButtonType="Radzen.ButtonType.Button" Click="@((args) => dialogService.Close(true))" Text="Close" ButtonStyle="ButtonStyle.Secondary" />
+        </RadzenStack>
+    </RadzenStack>
+</RadzenTemplateForm>

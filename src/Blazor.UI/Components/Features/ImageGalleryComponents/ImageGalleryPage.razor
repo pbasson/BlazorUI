@@ -1,0 +1,15 @@
+@page "/ImageGallery"
+
+<h2>@DataSource.Title</h2>
+
+<NavigateHome />
+
+@if (DataSource.Loading)
+{
+    <LoadingComponent />
+}
+else
+{
+    <ImageGalleryGrid DataSet="@DataSource.DataSet"/>
+    <br />
+}

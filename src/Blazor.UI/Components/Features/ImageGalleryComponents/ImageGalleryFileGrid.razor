@@ -1,0 +1,52 @@
+@if (DataSet != null && DataSet.Count > 0)
+{
+    <RadzenDataGrid Data="@ImageRows" TItem="ImageFileRow"
+            AllowPaging="true" PageSize="@RowsPerPage"
+            PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            AllowSorting="false"
+            AllowColumnResize="false"
+            AllowAlternatingRows="false"
+            Class="image-gallery-grid">
+        <Columns>
+            <RadzenDataGridColumn TItem="ImageFileRow">
+                <Template Context="row"><ImageGalleryFileTile GalleryPath="@GalleryPath" ImageFile="@row.Items.ElementAtOrDefault(0)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageFileRow">
+                <Template Context="row"><ImageGalleryFileTile GalleryPath="@GalleryPath" ImageFile="@row.Items.ElementAtOrDefault(1)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageFileRow">
+                <Template Context="row"><ImageGalleryFileTile GalleryPath="@GalleryPath" ImageFile="@row.Items.ElementAtOrDefault(2)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageFileRow">
+                <Template Context="row"><ImageGalleryFileTile GalleryPath="@GalleryPath" ImageFile="@row.Items.ElementAtOrDefault(3)" /></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImageFileRow">
+                <Template Context="row"><ImageGalleryFileTile GalleryPath="@GalleryPath" ImageFile="@row.Items.ElementAtOrDefault(4)" /></Template>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+}
+else
+{
+    <p>@PageConstants.NoDataset</p>
+}
+
+@code {
+    [Parameter]
+    public string? GalleryPath { get; set; }
+
+    [Parameter]
+    public List<ImageFileDTO>? DataSet { get; set; }
+
+    private const int ItemsPerRow = 5;
+    private const int RowsPerPage = 4;
+
+    private IEnumerable<ImageFileRow> ImageRows =>
+        DataSet?
+            .OrderBy(image => image.ImagePosition)
+            .Chunk(ItemsPerRow)
+            .Select(items => new ImageFileRow(items))
+        ?? [];
+
+    private sealed record ImageFileRow(ImageFileDTO[] Items);
+}

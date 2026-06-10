@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  selector:
+    app: blazorcore-app
+  type: LoadBalancer
+  ports:
+  - port: 5147
+    targetPort: 5147
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blazorcore-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: blazorcore-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: blazorcore-app
+        tier: frontend
+    spec:
+      containers:
+      - name: blazorcore-node
+        image: preetbasson/blazorcore-ui
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env: 
+        - name: CoreApi__URL
+          valueFrom: 
+            configMapKeyRef: 
+              name: dev-frontend-config
+              key: coreapi_url
+        - name: CoreApi__KEY
+          valueFrom: 
+            configMapKeyRef: 
+              name: dev-frontend-config
+              key: coreapi_key

@@ -1,0 +1,15 @@
+﻿@page "/User"
+
+<h2>@DataSource.Title</h2>
+
+<NavigateHome />
+
+@if (DataSource.Loading)
+{
+    <LoadingComponent />
+}
+else
+{
+    <UserGrid DataSet="@DataSource.DataSet"/>
+    <br />
+}

@@ -1,0 +1,12 @@
+::deep .image-gallery-grid .rz-grid-table {
+    table-layout: fixed;
+}
+
+::deep .image-gallery-grid .rz-cell-data {
+    overflow: visible;
+}
+
+::deep .image-gallery-grid td {
+    width: 20%;
+    vertical-align: top;
+}

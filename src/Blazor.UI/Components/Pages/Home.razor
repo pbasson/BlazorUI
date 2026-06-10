@@ -1,24 +1,30 @@
 ﻿@page "/"
 @page "/home"
-@using Blazor.Core.Helpers
-@using Blazor.UI.Components.PageComponents
-@using Blazor.UI.Helpers
-@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components.Web
+@inject ILogger<Home> logger;
 
 <PageTitle>Home</PageTitle>
 
-<h2>Welcome to Blazor UI</h2>
-<p>By Preetpal Basson (Developed & Designed)</p>
 
-<NavigateToPage Path=@PathVariables.Weather />
-<NavigateToPage Path=@PathVariables.Counter />
-<NavigateToPage Path=@PathVariables.Transaction />
+<div class="home-page">
+    <h2>@WelcomeMessage</h2>
+    <p>@Author</p>
+
+    <div class="home-actions">
+        <NavigateToPage Path=@NavigationConstants.Weather />
+        <NavigateToPage Path=@NavigationConstants.Counter />
+        <NavigateToPage Path=@NavigationConstants.User />
+        <NavigateToPage Path=@NavigationConstants.ImageGallery />
+    </div>
+</div>
 
 @code
 {
+    private readonly string WelcomeMessage = "Welcome to Blazor UI";
+    private readonly string Author = "By Preetpal Basson (Developed & Designed)";
+
     protected async override Task OnInitializedAsync()
     {
-        Console.WriteLine("Home Page Loaded");
+        logger.LogInformation("Home Page: Loaded");
     }
-
 }

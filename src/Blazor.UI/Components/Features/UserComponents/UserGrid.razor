@@ -1,0 +1,36 @@
+﻿@inject DialogService DialogService
+@inject ToastService toastService
+
+@if(DataSet != null && DataSet.Any() ) 
+{ 
+    <RadzenDataGrid Data="@DataSet" TItem="UserDTO"
+            AllowColumnResize="true" 
+            AllowAlternatingRows="false" 
+            AllowSorting="true" Count="@DataSet.Count()"
+            PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            AllowPaging="true" PageSize="20" 
+            ColumnWidth="200px" 
+            >
+            <HeaderTemplate>
+                <RadzenStack>
+                    <RadzenButton  Text="Add" Click="AddRecord"> <i class="bi bi-plus-circle">Add</i> </RadzenButton>
+                </RadzenStack>
+            </HeaderTemplate>
+        <Columns>
+            <RadzenDataGridColumn TItem="UserDTO" Property="Id" Title="Id" Width="50px" />
+            <RadzenDataGridColumn TItem="UserDTO" Property="UserName" Title="UserName"   />
+            <RadzenDataGridColumn TItem="UserDTO" Property="FirstName" Title="FirstName"   />
+            <RadzenDataGridColumn TItem="UserDTO" Property="LastName" Title="LastName"   />
+            <RadzenDataGridColumn TItem="UserDTO" Property="DateOfBirth" Title="Date Of Birth"   />
+            <RadzenDataGridColumn TItem="UserDTO" Property="Email" Title="Email"   />
+            <RadzenDataGridColumn TItem="UserDTO" Frozen="true" Width="180px">
+                <Template Context="user">
+                    <RadzenButton Click="@((args) => EditRecord(args, user))"> <i class="bi bi-pencil-square">Edit</i> </RadzenButton>
+                    <RadzenButton Text="Confirm dialog" ButtonStyle="ButtonStyle.Secondary" Click="@((args) => ConfirmButton(args, user.Id))"> 
+                        <i class="bi bi-x-lg">Delete</i> </RadzenButton>
+                </Template>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+} 
+else  { <p>@PageConstants.NoDataset</p> }

@@ -1,0 +1,15 @@
+
+minikube service frontend
+
+kubectl apply -f ./kubernetes/frontend-kube/frontend-deployment.yml
+
+kubectl delete -f ./kubernetes/frontend-kube/frontend-deployment.yml
+
+kubectl delete -f ./kubernetes/frontend-kube/frontend-deployment.yml && kubectl apply -f ./kubernetes/frontend-kube/frontend-deployment.yml
+
+
+kubectl apply -f ./kubernetes/config-kube/dev-frontend-config.yml
+
+kubectl delete -f ./kubernetes/config-kube/dev-frontend-config.yml
+
+kubectl delete -f ./kubernetes/config-kube/dev-frontend-config.yml && kubectl apply -f ./kubernetes/config-kube/dev-frontend-config.yml

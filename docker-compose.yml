@@ -8,4 +8,14 @@ services:
       - 5147:5147
     restart: always
     env_file: 
-    - env/coreapi-dev.env
+      - ${API_SETTINGS}
+    networks:
+      - mysqlcore_network
+    volumes:
+      - ${IMAGE_PATH}:/app/wwwroot/images
+
+
+networks:
+  mysqlcore_network:
+    name: mysqlcore_network
+    external: true

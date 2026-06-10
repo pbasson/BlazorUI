@@ -1,0 +1,51 @@
+@page "/ImageGalleryDetails/{id:int}"
+
+<h2>@PageTitle</h2>
+
+<NavigateToPage Path="@NavigationConstants.ImageGallery" />
+
+@if (Loading)
+{
+    <LoadingComponent />
+}
+else if (Gallery is not null)
+{
+    <ImageGalleryFileGrid GalleryPath="@Gallery.GalleryPath" DataSet="@Gallery.ImageFile" />
+}
+else
+{
+    <p>@PageConstants.NoDataset</p>
+}
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    [Inject]
+    ImageGalleryService Services { get; set; } = default!;
+
+    [Inject]
+    ToastService ToastService { get; set; } = default!;
+
+    private bool Loading { get; set; }
+    private ImageGalleryDTO? Gallery { get; set; }
+    private string PageTitle => Gallery?.GalleryName ?? "Image Gallery Details";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) { return; }
+
+        ToastService.Notify(new(ToastType.Info, "Loading ImageGallery details..."));
+        Loading = true;
+        StateHasChanged();
+
+        var result = await Services.GetRecordByIdAsync(id);
+        Gallery = result.Record;
+        Loading = false;
+
+        ToastService.Notify(new(Gallery is not null ? ToastType.Success : ToastType.Warning,
+            Gallery is not null ? "ImageGallery details: Loaded." : "ImageGallery details: No images found."));
+
+        StateHasChanged();
+    }
+}
